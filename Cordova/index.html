@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>Cordova, Phonegap, AngularJS et leurs amis.</title>
+		<title>Cordova, PhoneGap, AngularJS et leurs amis.</title>
 
 		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
 		<meta name="author" content="Hakim El Hattab">
@@ -30,6 +30,7 @@
 				document.getElementsByTagName( 'head' )[0].appendChild( link );
 			}
 		</script>
+		<link rel="stylesheet" href="css/style.css">
 
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
@@ -46,7 +47,7 @@
 					<h1>Cordova</h1>
 					<h3>Applications mobiles en HTML/CSS/JS</h3>
 					<p>
-						<small>Par <a href="http://www.clementboudon.info">Clément Boudon</a> / Powered by <a href="https://github.com/hakimel/reveal.js/">Reveal.js</a></small>
+						<small>Par <a href="http://www.clementboudon.info">Clément Boudon</a></small>
 					</p>
 				</section>
 
@@ -57,9 +58,9 @@
 					<section>
 						<h3>1/ Application Native</h3>
 						<ul>
-							<li>iOS en Objective-C / Swift</li>
-							<li>Android en Java</li>
-							<li>Windos Phone en .NET type C#</li>
+							<li><img src="img/ios8.png" height="32px">&nbsp;iOS en Objective-C / Swift</li>
+							<li><img src="img/android.png" height="32px">&nbsp;Android en Java</li>
+							<li><img src="img/windows-phone.png" height="32px">&nbsp;Windos Phone en .NET type C#</li>
 							<li>...</li>
 						</ul>
 						<aside class="notes">
@@ -73,7 +74,7 @@
 					</section>
 					<section>
 						<h3>3/ Application hybride</h3>
-						<h5>"Cross-Plateform Dev Tools"</h5>
+						<p>"Cross-Plateform Development Tools"</p>
 					</section>
 				</section>
 
@@ -82,40 +83,47 @@
 						<h2>Les outils hybrides</h2>
 					</section>
 					<section>
-						<h3>Phonegap / Cordova</h3>
-						<h5>HTML/CSS/JS</h5>
+						<h3><a href="http://phonegap.com/" target="_blank">PhoneGap / Cordova</a></h3>
+						<img src="img/cordova.png" height="250px">
+						<p>HTML/CSS/JS</p>
 					</section>
 					<section>
-						<h3>Titanium / Appcelerator</h3>
-						<h5>JS</h5>
+						<h3><a href="http://www.appcelerator.com/titanium/" target="_blank">Titanium / Appcelerator</a></h3>
+						<img src="img/titanium.png" height="250px">
+						<p>JavaScript</p>
 					</section>
 					<section>
-						<h3>Xamarin</h3>
-						<h5>C#</h5>
+						<h3><a href="http://xamarin.com/" target="_blank">Xamarin</a></h3>
+						<img src="img/xamarin.png" height="250px">
+						<p>C#</p>
 					</section>
 					<section>
-						<h3>Rhodes</h3>
-						<h5>Ruby</h5>
+						<h3><a href="http://rhomobile.com/" target="_blank">Rhodes</a></h3>
+						<img src="img/rhodes.png" height="250px">
+						<p>Ruby</p>
 					</section>
 					<section>
-						<h3>Qt</h3>
-						<h5>C++</h5>
+						<h3><a href="http://qt-project.org/" target="_blank">Qt</a></h3>
+						<img src="img/qt.png" height="250px">
+						<p>C++</p>
 					</section>
 					<section>
-						<h3>Adobe Air</h3>
-						<h5>En concurrence avec Phonegap chez Adobe</h5>
+						<h3><a href="http://www.adobe.com/lu_fr/products/air.html" target="_blank">Adobe Air</a></h3>
+						<img src="img/adobe-air.png" height="250px">
+						<p>En concurrence avec PhoneGap chez Adobe</p>
 					</section>
 				</section>
 				<section>
-					<section>
-						<h2>Phonegap, Cordova, WTF ?</h2>
+					<section data-background="img/wtf.png">
+						<h2 style="background-color: rgba(184, 222, 232, 0.92);padding: 10px;">PhoneGap, Cordova, ...<br>
+						WTF ?</h2>
 					</section>
 					<section>
-						<h3>Phonegap</h3>
-						<p>CLI tool de génération d'application mobile à partir d'HTML/JS fixe</p>
+						<h3>PhoneGap</h3>
+						<p>Outil en ligne de commande de génération d'application mobile à partir d'HTML/JS fixe</p>
 					</section>
 					<section>
-						<h3>Phonegap</h3>
+						<h3>PhoneGap</h3>
 						<ul>
 							<li>Développé en 2009 par Nitobi Software</li>
 							<li>Racheté par Adobe en 2011</li>
@@ -124,11 +132,12 @@
 					</section>
 					<section>
 						<h3>Cordova</h3>
-						<p><strong>Apache Callback puis Apache Cordova</strong> : l'outil de génération des applications. <br>Open-source</p>
+						<p><strong>Apache <strike>Callback</strike> Cordova</strong> : outil de génération des applications.</p>
+						<p>Open-source.</p>
 					</section>
 					<section>
-						<h3>Phonegap Build</h3>
-						<p><strong>Phonegap Build</strong> : outil dans le cloud de génération d'app, fournit par Adobe.</p>
+						<h3>PhoneGap Build</h3>
+						<p><strong>PhoneGap Build</strong> : outil dans le cloud de génération d'app, fournit par Adobe.</p>
 						<aside class="notes">
 							<p>Modèle éco : projet publics free / 10$/mois projets privés</p>
 						</aside>
@@ -140,24 +149,29 @@
 					</section>
 					<section>
 						<h3>1/ App HTML/JS</h3>
-						<p>Client only. Services serveur sous forme d'API.</p>
+						<p>Client side only. Services serveur sous forme d'API.</p>
 						<p><strong>Utilisation d'un framework JS</strong> : pas obligatoire mais nécessaire pour structurer correctement l'application en JS</p>
 					</section>
 					<section>
 						<h3>API Cordova</h3>
-						<p>Bibliotèque de fonctions pour accès natifs (géolocation, camera, vibreur, ...).</p>
+						<p>Bibliotèque de fonctions pour accès natifs (Geolocation, Camera, Vibration, ...).</p>
 					</section>
 					<section>
 						<h3>2/ Génération d'une app native</h3>
-						<p>App native qui inclut en webview les fichier HTML.</p>
+						<p>App native qui inclut en webview les fichiers HTML.</p>
 					</section>
 					<section>
 						<h3>3/ Test de l'application native</h3>
 						<p>Via les outils propres à chaque plateforme (Android Studio / Eclipse, Xcode, ...).</p>
 					</section>
 					<section>
-						<h3>4/ Signature, build et publication de l'app</h3>
-						<p>Profit</p>
+						<h3>4/ Diffusion</h3>
+						<ol>
+						 	<li>Signer et compiler l'application</li>
+						 	<li>Publier l'application</li>
+						 	<li>????</li>
+						 	<li>PROFIT!!!</li>
+						 </ol> 
 					</section>
 				</section>
 				<section>
@@ -170,24 +184,32 @@
 					</section>
 					<section>
 						<h3>Création du projet Cordova</h3>
-						<pre>cordova create Test1 fr.digi-media.test1 "App Test 1"</pre>
+						<pre><code data-trim class=" hljs shell hljs ">
+								cordova create Test1 fr.digi-media.test1 "App Test 1"
+						</code></pre>
 					</section>
 					<section>
 						<h3>Import des sources HTML</h3>
-						<p>Un dossier www a été créé, ajout des fichiers sources HTML/CSS/JS</p>
+						<p>Un dossier <code>"./www/"</code> a été créé, <br>ajout des fichiers sources HTML/CSS/JS</p>
 					</section>
 					<section>
-						<h3>Ajout de la plateforme Android / iOS</h3>
-						<pre>cordova platforms add android | ios </pre>
+						<h3>Ajout de la plateforme</h3>
+						<pre><code data-trim class=" hljs shell hljs ">
+								cordova platforms add android | ios 
+						</code></pre>
 						<p>Génération des sources des apps natives</p>
 					</section>
 					<section>
 						<h3>Build de l'application</h3>
-						<pre>cordova build</pre>
+						<pre><code data-trim class=" hljs shell hljs ">
+								cordova build
+						</code></pre>
 					</section>
 					<section>
-						<h3>Lancement de l'applicaiton</h3>
-						<pre>cordova run android | ios</pre>
+						<h3>Lancement de l'application</h3>
+						<pre><code data-trim class=" hljs shell hljs ">
+								cordova run android | ios
+						</code></pre>
 					</section>
 				</section>
 				<section>
@@ -197,64 +219,73 @@
 					<section>
 						<h3>Test / debug</h3>
 						<ul>
-							<li>Android Studio sur sources Java + ADM Device virtuel, USB Debug</li>
-							<li>Xcode iOS sur sources Objective-C + simulateur intégré</li>
+							<li>Android Studio avec les sources Java.<br>
+							ADM Device virtuel, USB Debug.</li>
+							<li>Xcode iOS avec les sources Objective-C.<br>
+							Simulateur intégré.</li>
 						</ul>
 					</section>
 					<section>
-						<h3>Signature puis soumission Android</h3>
+						<h3>Signature et soumission Android</h3>
 						<ul>
 							<li>Android Studio : .apk signée (génération de clé à ce moment-là)</li>
-							<li>Sur GooglePlay, création d’un compte dev (<a href="https://play.google.com/apps/publish/signup/">https://play.google.com/apps/publish/signup/</a>), payer 25$ (one shot, multi app)</li>
-							<li>Envoi de l’.apk et Profit</li>
+							<li>Sur GooglePlay, création d’un compte dev (<a href="https://play.google.com/apps/publish/signup/" target="_blank">https://play.google.com/apps/publish/signup/</a>), 25$ (one shot, multi app)</li>
+							<li>Envoi de l’.apk</li>
+							<li>PROFIT!!!</li>
 						</ul>
 					</section>
 					<section>
 						<h3>iOS</h3>
 						<ul>
-							<li>Compte dev Apple (<a href="https://developer.apple.com/devcenter/ios/index.action">https://developer.apple.com/devcenter/ios/index.action</a>) 99$ / an</li>
+							<li>Compte dev Apple (<a href="https://developer.apple.com/devcenter/ios/index.action" target="_blank">https://developer.apple.com/devcenter/ios/index.action</a>) 99$ / an</li>
 							<li>Récupération des certificats puis signature et build depuis Xcode de l’.ipa</li>
-							<li>Envoi (préparer dans Apple Dev, penser aux versions, puis envoyer via Xcode) et Profit</li>
+							<li>Envoi (préparer dans Apple Dev, penser aux versions, puis envoyer via Xcode)</li>
+							<li>More PROFIT!!!</li>
 						</ul>
 					</section>
 				</section>
 				<section>
 					<section>
-						<h2>Outls divers</h2>
+						<h2>Outils divers</h2>
 					</section>
 					<section>
-						<h3>Pre-requis : NodeJS pour installer Cordova</h3>
-						<pre>npm install -g cordova</pre>
+						<h3>Pre-requis : NodeJS</h3>
+						<img src="img/node-only.png" height="300px">
+						<p>pour installer Cordova</p>
+						<pre><code data-trim class=" hljs shell hljs ">
+								npm install -g cordova
+						</code></pre>
 					</section>
 					<section>
 						<h3>Pre-requis : Android</h3>
 						<ul>
-							<li>Java JDK (PATH)</li>
-							<li>SDK Android (PATHs)</li>
-							<li>Apache ANT (PATH)</li>
+							<li><a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank">Java JDK</a> (PATH)</li>
+							<li class="fragment"><a href="http://developer.android.com/sdk/index.html" target="_blank">SDK Android</a> (PATHs)</li>
+							<li class="fragment"><a href="http://ant.apache.org/bindownload.cgi" target="_blank">Apache ANT</a> (PATH)</li>
 						</ul>
 					</section>
 					<section>
 						<h3>Pre-requis : iOS</h3>
 						<ul>
-							<li>Avoir un Mac (et Xcode gratuit)</li>
-							<li>Et c'est tout.</li>
+							<li>Avoir MacOS (et Xcode, gratuit)</li>
+							<li class="fragment">Et c'est tout.</li>
 						</ul>
 
 						<aside class="notes">
-							<p>Utilisation de Phonegap Build  d'Adobe</p>
+							<p>Utilisation de PhoneGap Build  d'Adobe</p>
 						</aside>
 					</section>
 					<section>
 						<h3>AngularJS</h3>
+						<img src="img/angularjs.png" height="300px">
 						<p>Application OnePage, donc structuration du code JavaScript</p>
-
 						<aside class="notes">
 							<p>Autres FrameWork : Backbone, JQuery mobile, ...</p>
 						</aside>
 					</section>
 					<section>
 						<h3>Extension Ripple</h3>
+						<img src="img/ripple.png" height="300px">
 						<p>Simulation du contexte mobile Cordova dans un navigateur classique.</p>
 					</section>
 				</section>
@@ -262,25 +293,42 @@
 					<section>
 						<h2>Let's code</h2>
 					</section>
-					<section>
+					<section data-background="img/app/iPhone6-meteo-v1.png" style="background: rgba(215, 236, 241, 0.75);">
 						<h3>Application de test météo</h3>
 						<p>Copié/collé <a href="http://grafikart.fr/tutoriels/cordova">http://grafikart.fr/tutoriels/cordova</a></p>
 					</section>
 					<section>
 						<h3>CSS</h3>
-						<p>A partir d'un template en ligne.</p>
+						<img src="img/app/home.png">&nbsp;&nbsp;&nbsp;<img src="img/app/detail.png">
+						<p>&Agrave; partir d'un template en ligne.</p>
 					</section>
 					<section>
-						<h3>HTML/JS</h3>
-						<p>Données externes OpenWeatherMap</p>
+						<h3>HTML/JS "Front Scratch"</h3>
+						<p>Données externes <a href="http://openweathermap.org/" target="_blank"><img src="img/openweathermap.png" height="30px">OpenWeatherMap</a></p>
 					</section>
 					<section>
-						<h3>Strcture JS</h3>
+						<h3>Structure JS</h3>
 						<p>AngularJS</p>
 					</section>
 					<section>
-						<h3>Builds Android Only</h3>
+						<h3>Android Only</h3>
+						<img src="img/ios8-sad.png" height="300px">
 					</section>
+				</section>
+				<section>
+					<h2>That's all folks !</h2>
+					<p>
+						<small>Retrouvez cette présentation sur <a href="clementboudon.github.io/Cordova">clementboudon.github.io/Cordova</a> <br>
+						Powered by <a href="https://github.com/hakimel/reveal.js/">Reveal.js</a></small>
+					</p>
+					<br>
+					<p>Références :</p>
+					<ul>
+						<li><a href="http://en.wikipedia.org/wiki/Mobile_application_development" target="_blank">Wikipedia</a></li>
+						<li><a href="http://www.developereconomics.com/pros-cons-top-5-cross-platform-tools/" target="_blank">Developer Economics</a></li>
+						<li><a href="http://www.alsacreations.com/tuto/lire/1646-introduction-phonegap.html" target="_blank">Alsa Créations</a></li>
+						<li><a href="http://www.grafikart.fr/tutoriels/cordova" target="_blank">Grafikart</a></li>
+					</ul>
 				</section>
 			</div>
 		</div>
@@ -293,13 +341,13 @@
 			// Full list of configuration options available here:
 			// https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
-				controls: true,
+				controls: false,
 				progress: true,
 				history: true,
 				center: true,
 
-				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+				theme: 'sky', // available themes are in /css/theme
+				transition: 'linear', // default/cube/page/concave/zoom/linear/fade/none
 
 				// Parallax scrolling
 				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
