@@ -61,7 +61,7 @@
 							<li><img src="img/ios8.png" height="32px">&nbsp; en Objective-C / Swift</li>
 							<li><img src="img/android.png" height="32px">&nbsp; en Java</li>
 							<li><img src="img/windows-phone.png" height="32px">&nbsp; en .NET type C#</li>
-							<li>...</li>
+							<li>&hellip;</li>
 						</ul>
 						<aside class="notes">
 							<ul>
@@ -70,7 +70,7 @@
 						</aside>
 					</section>
 					<section>
-						<h3>2/ Application vide avec Webview et URL externe</h3>
+						<h3>2/ Application Webview et URL externe</h3>
 					</section>
 					<section>
 						<h3>3/ Application hybride</h3>
@@ -115,7 +115,7 @@
 				</section>
 				<section>
 					<section data-background="img/wtf.png">
-						<h2 style="background-color: rgba(184, 222, 232, 0.92);padding: 10px;">PhoneGap, Cordova, ...<br>
+						<h2 style="background-color: rgba(184, 222, 232, 0.92);padding: 10px;">PhoneGap, Cordova, &hellip;<br>
 						WTF ?</h2>
 					</section>
 					<section>
@@ -145,7 +145,7 @@
 				</section>
 				<section>
 					<section>
-						<h2>Principes Cordova</h2>
+						<h2>Cordova : la théorie</h2>
 					</section>
 					<section>
 						<h3>1/ App HTML/JS</h3>
@@ -154,7 +154,7 @@
 					</section>
 					<section>
 						<h3>API Cordova</h3>
-						<p>Bibliothèque de fonctions pour accès natifs (Geolocation, Camera, Vibration, ...).</p>
+						<p>Bibliothèque de fonctions pour accès natifs (Geolocation, Camera, Vibration, &hellip;).</p>
 					</section>
 					<section>
 						<h3>2/ Génération d'une app native</h3>
@@ -162,7 +162,7 @@
 					</section>
 					<section>
 						<h3>3/ Test de l'application native</h3>
-						<p>Via les outils propres à chaque plateforme (Android Studio / Eclipse, Xcode, ...).</p>
+						<p>Via les outils propres à chaque plateforme (Android Studio / Eclipse, Xcode, &hellip;).</p>
 					</section>
 					<section>
 						<h3>4/ Diffusion</h3>
@@ -176,7 +176,7 @@
 				</section>
 				<section>
 					<section>
-						<h2>Utilisation de Cordova</h2>
+						<h2>Cordova : la pratique</h2>
 					</section>
 					<section>
 						<h3>Postulat</h3>
@@ -219,27 +219,28 @@
 					<section>
 						<h3>Test / debug</h3>
 						<ul>
-							<li>Android Studio avec les sources Java.<br>
-							ADM Device virtuel, USB Debug.</li>
-							<li>Xcode iOS avec les sources Objective-C.<br>
+							<li><strong>Android Studio</strong> avec les sources Java.<br>
+							ADM Device virtuel, USB Debug.</li><br>
+							<li><strong>Xcode</strong> iOS avec les sources Objective-C.<br>
 							Simulateur intégré.</li>
 						</ul>
 					</section>
 					<section>
-						<h3>Signature et soumission Android</h3>
+						<h3>Signature et soumission :<br>Android</h3><br>
 						<ul>
-							<li>Android Studio : .apk signée (génération de clé à ce moment-là)</li>
-							<li>Sur GooglePlay, création d’un compte dev (<a href="https://play.google.com/apps/publish/signup/" target="_blank">https://play.google.com/apps/publish/signup/</a>), 25$ (one shot, multi app)</li>
-							<li>Envoi de l’.apk</li>
+							<li>Sur Android Studio : génération d'une .apk signée</li><br>
+							<li>Sur <a href="https://play.google.com/apps/publish/signup/" target="_blank">GooglePlay</a> :
+							création d’un compte développeur à $25</li><br>
+							<li>Envoi de l’.apk</li><br>
 							<li>PROFIT!!!</li>
 						</ul>
 					</section>
 					<section>
-						<h3>iOS</h3>
+						<h3>Signature et soumission :<br>iOS</h3><br>
 						<ul>
-							<li>Compte dev Apple (<a href="https://developer.apple.com/devcenter/ios/index.action" target="_blank">https://developer.apple.com/devcenter/ios/index.action</a>) 99$ / an</li>
-							<li>Récupération des certificats puis signature et build depuis Xcode de l’.ipa</li>
-							<li>Envoi (préparer dans Apple Dev, penser aux versions, puis envoyer via Xcode)</li>
+							<li>Création d'un compte développeur sur le <a href="https://developer.apple.com/devcenter/ios/index.action" target="_blank">DevCenter</a> à  $99 / an</li><br>
+							<li>Récupération des certificats puis signature et build depuis Xcode de l’.ipa</li><br>
+							<li>Envoi de l'application (préparé dans l'Apple DevCenter puis envoyé via Xcode)</li><br>
 							<li>More PROFIT!!!</li>
 						</ul>
 					</section>
@@ -277,10 +278,17 @@
 					</section>
 					<section>
 						<h3>AngularJS</h3>
-						<img src="img/angularjs.png" height="300px">
-						<p>Application OnePage, donc structuration du code JavaScript</p>
+						<img src="img/angularjs.png" height="250px">
+						<p><strong>S</strong>ingle <strong>P</strong>age <strong>A</strong>pplication, donc structuration du code JavaScript nécessaire.</p>
+						<br>
+						<p>Modules / Plugins AngularJS dédiés mobile ou Cordova :<br>
+						<a href="https://docs.angularjs.org/api/ngTouch" target="_blank">ngTouch</a>, <a herf="https://github.com/btford/angular-phonegap-ready" target="_blank">angular-phonegap-ready</a>, &hellip;.</p>
+						<br>
+						<p>Et même un framework basé sur Cordova / AngularJS : <br>
+						<a href="http://ionicframework.com/" target="_blank"><img src="img/ionic.png" height="30px">&nbsp;Ionic Framework</a></p>
 						<aside class="notes">
-							<p>Autres FrameWork : Backbone, JQuery mobile, ...</p>
+							<p>Plugins Angular dédiés.<br>
+							Autres FrameWork : Backbone, JQuery mobile, &hellip;</p>
 						</aside>
 					</section>
 					<section>
@@ -294,8 +302,8 @@
 						<h2>Let's code</h2>
 					</section>
 					<section data-background="img/app/iPhone6-meteo-v1.png" style="background: rgba(215, 236, 241, 0.75);">
-						<h3>Application de test météo</h3>
-						<p>Copié/collé <a href="http://grafikart.fr/tutoriels/cordova">http://grafikart.fr/tutoriels/cordova</a></p>
+						<h3>Application météo</h3>
+						<p>Copié/collé de <a href="http://grafikart.fr/tutoriels/cordova" target="_blank">http://grafikart.fr/tutoriels/cordova</a></p>
 					</section>
 					<section>
 						<h3>CSS</h3>
@@ -329,7 +337,7 @@
 					<br>
 					<p>
 						<small>Retrouvez cette présentation sur <a href="http://clementboudon.github.io/Cordova">clementboudon.github.io/Cordova</a> <br>
-						Powered by <a href="https://github.com/hakimel/reveal.js/">Reveal.js</a></small>
+						Powered by <a href="https://github.com/hakimel/reveal.js/" target="_blank">Reveal.js</a></small>
 					</p>
 				</section>
 			</div>
