@@ -52,11 +52,294 @@
 				</section>
 
 				<section>
+					<section>
+						<h2>Principes de base</h2>
+					</section>
+					<section>
+						<h3>Développement moderne</h3>
+						<p>
+							<strong>Avant</strong> : chaque développeur développe ses features, et on les intègre au produit en une seule release.<br>
+							<strong>Maintenant</strong> : chaque développeur intègre chaque feature comme une nouvelle release.<br>
+							<strong>Problème</strong> : à chaque nouvelle feature, risque de régressions, bugs, effet de bord, baisse de qualité de code, de documentation ...
+						</p>
+						<aside class="notes">
+							<p>
+
+							</p>
+						</aside>
+					</section>
+					<section>
+						<h3>Versionnement du code</h3>
+						<p>
+							Utilisation des outils de versionnement du code (decentralisés ou non), permettant à différentes entitées (humain ou non) d'accéder au code source du projet.
+						</p>
+						<aside class="notes">
+							<p>
+								+ Gestion de branche, tests/controles propres à certaines features
+							</p>
+						</aside>
+					</section>
+					<section>
+						<h3>POO et Tests Unitaires</h3>
+						<p>
+							Développement objet permet découpage par modules, testables individuellement, facilitant les tests automatisables.
+						</p>
+						<aside class="notes">
+							<p>
+								Tests unitaires / fonctionnels : app hérite de classes phpunit, puis lancement script via CLI phpunit capable d'interpréter les retours standardisés.<br>
+								Stephane abordera cela plus complètement lors des formations internes ZF2.
+							</p>
+						</aside>
+					</section>
+					<section>
+						<h3>Intégration Continue</h3>
+						<p>
+							Avoir un outil intermédiaire capable de récupérer le code source à chaque release, et lancer etinterpréter tous les tests de l'application permettant de confirmer la possibilité d'intégrer la feature dans le produit, avec pilotage sur exceptions (alerte si erreur, sinon reste silencieux).<br>
+							Et après ?
+						</p>
+						<aside class="notes">
+							<p>
+								+ Revue de code, de documentation, ...
+							</p>
+						</aside>
+					</section>
+					<section>
+						<h3>Déploiement Continu</h3>
+						<p>
+							A partir d'une nouvelle version de l'appli validée, build puis envoi des nouveaux binaries, soit pour un site web : envoyer les fichiers sur le(s) serveur(s) et activer les procédures de mises à jour.
+						</p>
+						<aside class="notes">
+							<p>
+
+							</p>
+						</aside>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Les outils d'intégration continue</h2>
+					</section>
+					<section>
+						<h3>1/ Hosted</h3>
+						<p>
+							hébergé sur ses propres serveurs
+							<ul>
+								<li>Jenkins</li>
+								<li>CruisControle</li>
+								<li>Apache Continuum, SonarQube, Tinderbox, TeamCity, ...</li>
+							</ul>
+						</p>
+						<aside class="notes">
+							<p>
+
+							</p>
+						</aside>
+					</section>
+					<section>
+						<h3>Jenkins</h3>
+						<p>
+							Jenkins (anciennement Hudson) : <br>
+								logiciel en java, à la base pour java, mais intègre un plugin php. Permet également d’évaluer la qualité du code : redondance, dépréceiation potentielle, niveau de documentation, etc…. Beaucoup plus complet, mais donc plus complexe.
+						</p>
+						<aside class="notes">
+							<p>
+
+							</p>
+						</aside>
+					</section>
+					<section>
+						<h3>2/ P (S) AAS</h3>
+						<p>
+							Plateforme (Service) As A Service<br>
+							<ul>
+								<li>Codeship</li>
+								<li>TravisCI</li>
+								<li>CircleCI, ...</li>
+							</ul>
+						</p>
+						<aside class="notes">
+							<p>
+							Plus simple, mais donc plsu limités.<br>
+								Prix :gratuit avec 100 build / mois 5 projets privé, puis payant : build illim, nombre de build concurrents test parrallèles.
+							</p>
+						</aside>
+					</section>
+					<section>
+						<h3>3/ Et pour les mobiles ?</h3>
+						<p>
+							Supportent TestFlight (permet les tests avec des utilisateurs tiers sans déploiement sur les store)<br>
+							Effectuent les build des app Android / iOS.<br>
+							<ul>
+								<li>CISimple</li>
+								<li>HostedCI</li>
+								<li>Phonegap version Adobe</li>
+							</ul>
+						</p>
+						<aside class="notes">
+							<p>
+
+							</p>
+						</aside>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Les outils de déploiement continu</h2>
+					</section>
+					<section>
+						<h3>EN FTP, SFTP, SSH</h3>
+						<p>
+							l'outil d'intégration continue se connecte en ftp (ou ssh) puis upload les fichiers, et exécute des commandes d'upgrade via ssh.
+						</p>
+						<aside class="notes">
+							<p>
+
+							</p>
+						</aside>
+					</section>
+					<section>
+						<h3>Push vers PASS</h3>
+						<p>
+							Envoi des modifs sur les plateformes d'hébergment cloud :<br>
+							<ul>
+								<li>Amazon Web Service</li>
+								<li>Heroku</li>
+								<li>...</li>
+							</ul>
+						</p>
+						<aside class="notes">
+							<p>
+								Heroku : hébergementen tant qu'origin depuis git (git push heroku master)
+							</p>
+						</aside>
+					</section>
+					<section>
+						<h3>Capistrano</h3>
+						<p>
+							Outil en Ruby qui clone un repo git, le transfert vers un ensemble de serveur et effectue les migrations DB.
+						</p>
+						<aside class="notes">
+							<p>
+								Nécessite des fichiers (notamment de migration) standardisé, donc adapté au framework de dev (surtout RubyOnRails)
+							</p>
+						</aside>
+					</section>
+					<section>
+						<h3>Murder</h3>
+						<p>
+							Utilisé par twitter pour diffuer les maj de code via bittorent.
+						</p>
+						<aside class="notes">
+							<p>
+
+							</p>
+						</aside>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Etude de cas : API DirtyBranding</h2>
+					</section>
+					<section>
+						<h3>Via Codeship</h3>
+						<aside class="notes">
+							<p>
+								Effectuer la démo codeship : <br>
+								<ul>
+									<li>Pré-requis</li>
+									<li>Compte codeship</li>
+									<li>Config projet (Github / script / tests</li>
+									<li>Test push invalide / valide</li>
+									<li>Déploiement (Heroku / FTP)</li>
+									<li>Notifications</li>
+								</ul>
+							</p>
+						</aside>
+					</section>
+					<section>
+						<h3>Via Jenkins</h3>
+						<aside class="notes">
+							<p>
+								Démo Jenkins :<br>
+								<ul>
+									<li>Montage vagrant</li>
+									<li>Installation jenkins</li>
+									<li>Paramétrage pour projet PHP (plugins, dépendances composer pour outils utilisés par Jenkins, nouveau job)</li>
+									<li>Lancement build</li>
+								</ul>
+							</p>
+						</aside>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Mise en pratique</h2>
+					</section>
+					<section>
+						<h3>CUISDEV / Projet type PS</h3>
+						<aside class="notes">
+							<p>
+								Utilité ?<br>
+								Particularités PS :
+								<ul>
+									<li>Vhosts</li>
+								</ul>
+							</p>
+						</aside>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Problématiques soulevées</h2>
+					</section>
+					<section>
+						<h3>Migration BDD</h3>
+						<p>
+						utilisation de scripts de maj (internes aux framework, fait maison via synchronisation fichier de miration.sql à chaque feature + script bash joué à chauqe déploiement)
+
+						</p>
+						<aside class="notes">
+							<p>
+
+							</p>
+						</aside>
+					</section>
+					<section>
+						<h3>Tests HTML / Comportement</h3>
+						<p>
+							tests unitaire via Bower, Angular, Jasmine (JS), ou lint CSS / HTML.<br>
+							Plus poussés en phase expérimentale (comparaison screenshot via DPXDT, Selenium)
+						</p>
+						<aside class="notes">
+							<p>
+
+							</p>
+						</aside>
+					</section>
+					<section>
+						<h3>Gestion des vhosts</h3>
+						<p>
+							Non problématique car tests internes à l'app, non lié à l'hébergement. Mais nécessite une adaptation de l'app (gestion des fichiers de config avec accès BDD, etc).
+						</p>
+						<aside class="notes">
+							<p>
+
+							</p>
+						</aside>
+					</section>
+				</section>
+
+				<section>
 					<h2>That's all folks !</h2>
 					<br>
 					<p>Références :</p>
 					<ul>
-						<li><a href="http://en.wikipedia.org/w" target="_blank">Wikipedia</a></li>
+						<li><a href="http://en.wikipedia.org/wiki/Continuous_delivery" target="_blank">Wikipedia</a></li>
 					</ul>
 					<br>
 					<br>
