@@ -57,24 +57,27 @@
 					</section>
 					<section>
 						<h3>Développement moderne</h3>
-						<p>
-							<strong>Avant</strong> : chaque développeur développe ses features, et on les intègre au produit en une seule release.<br>
-							<strong>Maintenant</strong> : chaque développeur intègre chaque feature comme une nouvelle release.<br>
-							<strong>Problème</strong> : à chaque nouvelle feature, risque de régressions, bugs, effet de bord, baisse de qualité de code, de documentation ...
-						</p>
+						<ul>
+							<li><strong>Avant</strong> : 1 release / mois<br></li>
+							<li><strong>Maintenant</strong> : 1 release par feature<br></li>
+							<li><strong>Problème</strong> : risque de régression</li>
+						</ul>
 						<aside class="notes">
 							<p>
-
+								<strong>Avant</strong> : chaque développeur développe ses features, et on les intègre au produit en une seule release.<br>
+								<strong>Maintenant</strong> : chaque développeur intègre chaque feature comme une nouvelle release.<br>
+								<strong>Problème</strong> : à chaque nouvelle feature, risque de régressions, bugs, effet de bord, baisse de qualité de code, de documentation ...
 							</p>
 						</aside>
 					</section>
 					<section>
 						<h3>Versionnement du code</h3>
 						<p>
-							Utilisation des outils de versionnement du code (decentralisés ou non), permettant à différentes entitées (humain ou non) d'accéder au code source du projet.
+							<img src="img/Git_icon.svg.png" height="250px">
 						</p>
 						<aside class="notes">
 							<p>
+							Utilisation des outils de versionnement du code (decentralisés ou non), permettant à différentes entitées (humain ou non) d'accéder au code source du projet.<br>
 								+ Gestion de branche, tests/controles propres à certaines features
 							</p>
 						</aside>
@@ -82,10 +85,34 @@
 					<section>
 						<h3>POO et Tests Unitaires</h3>
 						<p>
-							Développement objet permet découpage par modules, testables individuellement, facilitant les tests automatisables.
+							Développement objet : découpage par modules testables individuellement.
 						</p>
+						<pre>use Silex\WebTestCase;
+
+						class MainTest extends WebTestCase
+						{
+							public function createApplication()
+						    {
+						        $app = require __DIR__.'/../../../app.php';
+						        require __DIR__.'/../../../config.php';
+						        $app['debug'] = true;
+						    	$app['exception_handler']->disable();
+						    	return $app;
+						    }
+
+						    public function testInitialEndpoint()
+						    {
+						        $client = $this->createClient();
+							    $crawler = $client->request('GET', '/');
+
+							    $this->assertTrue($client->getResponse()->isOk());
+							    $this->assertContains('API DirtyBranding.', $client->getResponse()->getContent());
+						    }
+						}
+						</pre>
 						<aside class="notes">
 							<p>
+							Développement objet permet découpage par modules, testables individuellement, facilitant les tests automatisables.<br>
 								Tests unitaires / fonctionnels : app hérite de classes phpunit, puis lancement script via CLI phpunit capable d'interpréter les retours standardisés.<br>
 								Stephane abordera cela plus complètement lors des formations internes ZF2.
 							</p>
@@ -93,12 +120,14 @@
 					</section>
 					<section>
 						<h3>Intégration Continue</h3>
-						<p>
-							Avoir un outil intermédiaire capable de récupérer le code source à chaque release, et lancer etinterpréter tous les tests de l'application permettant de confirmer la possibilité d'intégrer la feature dans le produit, avec pilotage sur exceptions (alerte si erreur, sinon reste silencieux).<br>
-							Et après ?
-						</p>
+						<ul>
+							<li>Outil permettant de tester l'ensemble de l'application à chaque release.</li>
+							<li>Et après ?</li>
+						</ul>
 						<aside class="notes">
 							<p>
+							Avoir un outil intermédiaire capable de récupérer le code source à chaque release, lancer et interpréter tous les tests de l'application permettant de confirmer la possibilité d'intégrer la feature dans le produit, avec pilotage sur exceptions (alerte si erreur, sinon reste silencieux).<br>
+							Et après ?
 								+ Revue de code, de documentation, ...
 							</p>
 						</aside>
@@ -106,11 +135,11 @@
 					<section>
 						<h3>Déploiement Continu</h3>
 						<p>
-							A partir d'une nouvelle version de l'appli validée, build puis envoi des nouveaux binaries, soit pour un site web : envoyer les fichiers sur le(s) serveur(s) et activer les procédures de mises à jour.
+							Mettre à jour l'applicatif en production.
 						</p>
 						<aside class="notes">
 							<p>
-
+								A partir d'une nouvelle version de l'appli validée, build puis envoi des nouveaux binaries, soit pour un site web : envoyer les fichiers sur le(s) serveur(s) et activer les procédures de mises à jour.
 							</p>
 						</aside>
 					</section>
@@ -123,10 +152,10 @@
 					<section>
 						<h3>1/ Hosted</h3>
 						<p>
-							hébergé sur ses propres serveurs
+							Hébergé sur ses propres serveurs
 							<ul>
-								<li>Jenkins</li>
-								<li>CruisControle</li>
+								<li><img src="img/jenkins-logo+title.png" height="50px"></li>
+								<li><img src="img/Cruisecontrol.png" height="50px"></li>
 								<li>Apache Continuum, SonarQube, Tinderbox, TeamCity, ...</li>
 							</ul>
 						</p>
@@ -138,47 +167,53 @@
 					</section>
 					<section>
 						<h3>Jenkins</h3>
+						<img src="img/jenkins-head.png" height="250px">
 						<p>
-							Jenkins (anciennement Hudson) : <br>
-								logiciel en java, à la base pour java, mais intègre un plugin php. Permet également d’évaluer la qualité du code : redondance, dépréceiation potentielle, niveau de documentation, etc…. Beaucoup plus complet, mais donc plus complexe.
-						</p>
-						<aside class="notes">
-							<p>
-
-							</p>
-						</aside>
-					</section>
-					<section>
-						<h3>2/ P (S) AAS</h3>
-						<p>
-							Plateforme (Service) As A Service<br>
 							<ul>
-								<li>Codeship</li>
-								<li>TravisCI</li>
-								<li>CircleCI, ...</li>
+								<li>Anciennement Hudson</li>
+								<li>Java</li>
+								<li>(très) Nombreux plugins</li>
 							</ul>
 						</p>
 						<aside class="notes">
 							<p>
-							Plus simple, mais donc plsu limités.<br>
-								Prix :gratuit avec 100 build / mois 5 projets privé, puis payant : build illim, nombre de build concurrents test parrallèles.
+								Jenkins (anciennement Hudson) : <br>
+								logiciel en java, à la base pour java, mais intègre un plugin php. Permet également d’évaluer la qualité du code : redondance, dépréceiation potentielle, niveau de documentation, etc…. Beaucoup plus complet, mais donc plus complexe.
+							</p>
+						</aside>
+					</section>
+					<section>
+						<h3>2/ SAAS</h3>
+						<p>
+							<strong>S</strong>oftware <strong>A</strong>s <strong>A</strong> <strong>S</strong>ervice<br>
+							<ul>
+								<li><img src="img/codeship.png" height="50px"></li>
+								<li><img src="img/travis-mascot-200px.png" height="50px"></li>
+								<li><img src="img/Circleci.png" height="50px">, ...</li>
+							</ul>
+						</p>
+						<aside class="notes">
+							<p>
+							Software as a Service : Même le logiciel est géré par le cloud / Plateforme : seul l'applicatif n'est pas géré (type cloud Heroku)<br>
+							Plus simple, mais donc plus limité.<br>
+							Prix :gratuit avec 100 build / mois 5 projets privé, puis payant : build illim, nombre de build concurrents test parrallèles  ($50 / $250 / $2000 par mois)
 							</p>
 						</aside>
 					</section>
 					<section>
 						<h3>3/ Et pour les mobiles ?</h3>
 						<p>
-							Supportent TestFlight (permet les tests avec des utilisateurs tiers sans déploiement sur les store)<br>
-							Effectuent les build des app Android / iOS.<br>
 							<ul>
-								<li>CISimple</li>
-								<li>HostedCI</li>
-								<li>Phonegap version Adobe</li>
+								<li><img src="img/shipio-logo.png" height="50px"></li>
+								<li><img src="img/hostedci-logo.png" height="50px"></li>
+								<li><img src="img/Logo_phonegap.png" height="50px"></li>
 							</ul>
 						</p>
 						<aside class="notes">
 							<p>
-
+							Cisimple > Ship.io<br>
+							Supportent TestFlight (permet des beta tests avec des utilisateurs tiers avant déploiement sur les store)<br>
+							Effectuent les build des app Android / iOS.<br>
 							</p>
 						</aside>
 					</section>
@@ -190,50 +225,39 @@
 					</section>
 					<section>
 						<h3>EN FTP, SFTP, SSH</h3>
-						<p>
-							l'outil d'intégration continue se connecte en ftp (ou ssh) puis upload les fichiers, et exécute des commandes d'upgrade via ssh.
-						</p>
 						<aside class="notes">
 							<p>
-
+							l'outil d'intégration continue se connecte en ftp (ou ssh) puis upload les fichiers, et exécute des commandes d'upgrade via ssh.
 							</p>
 						</aside>
 					</section>
 					<section>
-						<h3>Push vers PASS</h3>
+						<h3>Push vers PAAS / Cloud</h3>
 						<p>
-							Envoi des modifs sur les plateformes d'hébergment cloud :<br>
+							Envoi sur les plateformes d'hébergment cloud :<br>
 							<ul>
-								<li>Amazon Web Service</li>
-								<li>Heroku</li>
+								<li><img src="img/aws-logo.jpg" height="50px"></li>
+								<li><img src="img/heroku_logo.png" height="50px"></li>
 								<li>...</li>
 							</ul>
 						</p>
 						<aside class="notes">
 							<p>
-								Heroku : hébergementen tant qu'origin depuis git (git push heroku master)
+							Plateforme As A service : hébergement sans gérer les couches applicatives serveur : heroku<br>
+							Cloud Amamzon : serveurs virtualisés à volonté.<br>
+							Heroku basé sur AWS (simplification du traintement)<br>
+							Heroku : hébergement en tant qu'origin depuis git (git push heroku master)
 							</p>
 						</aside>
 					</section>
 					<section>
 						<h3>Capistrano</h3>
-						<p>
-							Outil en Ruby qui clone un repo git, le transfert vers un ensemble de serveur et effectue les migrations DB.
-						</p>
+						<img src="img/CapistranoLogo.png" height="250px">
 						<aside class="notes">
 							<p>
-								Nécessite des fichiers (notamment de migration) standardisé, donc adapté au framework de dev (surtout RubyOnRails)
-							</p>
-						</aside>
-					</section>
-					<section>
-						<h3>Murder</h3>
-						<p>
-							Utilisé par twitter pour diffuer les maj de code via bittorent.
-						</p>
-						<aside class="notes">
-							<p>
-
+							Outil en Ruby qui clone un repo git, le transfert vers un ensemble de serveur et effectue les migrations DB.<br>
+								Nécessite des fichiers (notamment de migration) standardisé, donc adapté au framework de dev (surtout RubyOnRails).<br>
+								<strong>Note</strong> : Murder, utilisé par twitter pour diffuer les maj de code via bittorent.
 							</p>
 						</aside>
 					</section>
@@ -241,7 +265,49 @@
 
 				<section>
 					<section>
-						<h2>Etude de cas : API DirtyBranding</h2>
+						<h2>Problématiques</h2>
+					</section>
+					<section>
+						<h3>Migration BDD</h3>
+						<aside class="notes">
+							<p>
+utilisation de scripts de maj (internes aux framework, fait maison via synchronisation fichier de miration.sql à chaque feature + script bash joué à chauqe déploiement)
+							</p>
+						</aside>
+					</section>
+					<section>
+						<h3>Tests HTML<br><br>Tests d'affichage</h3>
+						<aside class="notes">
+						<p>
+							tests unitaire via Bower, Angular, Jasmine (JS), ou lint CSS / HTML.<br>
+							Plus poussés en phase expérimentale (comparaison screenshot via DPXDT, Selenium)
+						</p>
+						</aside>
+					</section>
+					<section>
+						<h3>Impact sur l'application<br><br>Gestion des vhosts</h3>
+						<aside class="notes">
+						<p>
+							Nécessite une adaptation de l'app (gestion des fichiers de config avec accès BDD, etc).<br>
+							Vhosts : pas dans le champs car tests internes à l'app, non lié à l'hébergement. Mais
+						</p>
+						</aside>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Etude de cas<br><br>API "DirtyBranding"</h2>
+						<img src="img/capture-db.png.png" height="450px">
+					</section>
+					<section>
+						<h3>Recherche de marque (en mega-Alpha)
+						<br><br>API basée sur Silex<br><br>Utilisation de tests unitaires</h3>
+						<aside class="notes">
+							<p>
+								Silex : micro-framework basé sur Symfony
+							</p>
+						</aside>
 					</section>
 					<section>
 						<h3>Via Codeship</h3>
@@ -275,7 +341,7 @@
 					</section>
 				</section>
 
-				<section>
+				<!-- <section>
 					<section>
 						<h2>Mise en pratique</h2>
 					</section>
@@ -291,55 +357,19 @@
 							</p>
 						</aside>
 					</section>
-				</section>
+				</section> -->
 
-				<section>
-					<section>
-						<h2>Problématiques soulevées</h2>
-					</section>
-					<section>
-						<h3>Migration BDD</h3>
-						<p>
-						utilisation de scripts de maj (internes aux framework, fait maison via synchronisation fichier de miration.sql à chaque feature + script bash joué à chauqe déploiement)
 
-						</p>
-						<aside class="notes">
-							<p>
-
-							</p>
-						</aside>
-					</section>
-					<section>
-						<h3>Tests HTML / Comportement</h3>
-						<p>
-							tests unitaire via Bower, Angular, Jasmine (JS), ou lint CSS / HTML.<br>
-							Plus poussés en phase expérimentale (comparaison screenshot via DPXDT, Selenium)
-						</p>
-						<aside class="notes">
-							<p>
-
-							</p>
-						</aside>
-					</section>
-					<section>
-						<h3>Gestion des vhosts</h3>
-						<p>
-							Non problématique car tests internes à l'app, non lié à l'hébergement. Mais nécessite une adaptation de l'app (gestion des fichiers de config avec accès BDD, etc).
-						</p>
-						<aside class="notes">
-							<p>
-
-							</p>
-						</aside>
-					</section>
-				</section>
 
 				<section>
 					<h2>That's all folks !</h2>
 					<br>
 					<p>Références :</p>
 					<ul>
-						<li><a href="http://en.wikipedia.org/wiki/Continuous_delivery" target="_blank">Wikipedia</a></li>
+						<li><a href="http://en.wikipedia.org/wiki/Continuous_delivery" target="_blank">Wikipedia - "Continuous Delivery"</a></li>
+						<li><a href="http://www.quora.com/What-is-the-difference-between-Bamboo-CircleCI-CIsimple-Ship-io-Codeship-Jenkins-Hudson-Semaphoreapp-Shippable-Solano-CI-TravisCI-and-Wercker" target="_blank">Quora - "Difference between CI tools"</a></li>
+						<li><a href="http://www.sitepoint.com/preparing-building-php-project-jenkins/" target="_blank">Sitepoint - "Jenkins"</a></li>
+						<li><a href="http://blog.pascal-martin.fr/post/integration-continue-jenkins-projet-php.html" target="_blank">Blog Pascal Martin - "Jenkins et PHP"</a></li>
 					</ul>
 					<br>
 					<br>
