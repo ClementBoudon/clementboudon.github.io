@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>L'intégration continue</title>
+		<title>Intégration Continue</title>
 
 		<meta name="description" content="">
 		<meta name="author" content="Clement Boudon">
@@ -44,7 +44,7 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h1>CI</h1>
+					<h1>IC</h1>
 					<h3><strong>I</strong>ntégration <strong>C</strong>ontinue</h3>
 					<p>
 						<small>Par <a href="http://www.clementboudon.info" target="_blank">Clément Boudon</a></small>
@@ -57,11 +57,9 @@
 					</section>
 					<section>
 						<h3>Développement moderne</h3>
-						<ul>
-							<li><strong>Avant</strong> : 1 release / mois<br></li>
-							<li><strong>Maintenant</strong> : 1 release par feature<br></li>
-							<li><strong>Problème</strong> : risque de régression</li>
-						</ul>
+						<p class="fragment fade-in" data-fragment-index="1"><strong>Avant</strong> : 1 release = plusieurs features<br></p>
+						<p class="fragment fade-in" data-fragment-index="2"><strong>Maintenant</strong> : 1 feature = 1 release<br></p>
+						<p class="fragment fade-in" data-fragment-index="3"><strong>Problème</strong> : Stabilité vs Réactivité</p>
 						<aside class="notes">
 							<p>
 								<strong>Avant</strong> : chaque développeur développe ses features, et on les intègre au produit en une seule release.<br>
@@ -87,29 +85,27 @@
 						<p>
 							Développement objet : découpage par modules testables individuellement.
 						</p>
-						<pre>use Silex\WebTestCase;
+<pre><code data-trim class="php" style="max-height: 450px;">
+use Silex\WebTestCase;
 
-						class MainTest extends WebTestCase
-						{
-							public function createApplication()
-						    {
-						        $app = require __DIR__.'/../../../app.php';
-						        require __DIR__.'/../../../config.php';
-						        $app['debug'] = true;
-						    	$app['exception_handler']->disable();
-						    	return $app;
-						    }
+class MainTest extends WebTestCase
+{
+    public function createApplication()
+    {
+        $app = require __DIR__.'/../../../app.php';
+        return $app;
+    }
 
-						    public function testInitialEndpoint()
-						    {
-						        $client = $this->createClient();
-							    $crawler = $client->request('GET', '/');
-
-							    $this->assertTrue($client->getResponse()->isOk());
-							    $this->assertContains('API DirtyBranding.', $client->getResponse()->getContent());
-						    }
-						}
-						</pre>
+    public function testInitialEndpoint()
+    {
+        $client = $this->createClient()->request('GET', '/');
+        $this->assertTrue($client->getResponse()->isOk());
+        $this->assertContains(
+            'API DirtyBranding.',
+            $client->getResponse()->getContent());
+    }
+}
+</code></pre>
 						<aside class="notes">
 							<p>
 							Développement objet permet découpage par modules, testables individuellement, facilitant les tests automatisables.<br>
@@ -120,10 +116,11 @@
 					</section>
 					<section>
 						<h3>Intégration Continue</h3>
-						<ul>
-							<li>Outil permettant de tester l'ensemble de l'application à chaque release.</li>
-							<li>Et après ?</li>
-						</ul>
+						<br><br>
+						<p class="fragment fade-in" data-fragment-index="1">Tester l'ensemble de l'application à chaque release <br>
+						(donc chaque feature).</p>
+						<br><br>
+						<h4 class="fragment fade-in" data-fragment-index="2">Et après ?</h4>
 						<aside class="notes">
 							<p>
 							Avoir un outil intermédiaire capable de récupérer le code source à chaque release, lancer et interpréter tous les tests de l'application permettant de confirmer la possibilité d'intégrer la feature dans le produit, avec pilotage sur exceptions (alerte si erreur, sinon reste silencieux).<br>
@@ -143,6 +140,24 @@
 							</p>
 						</aside>
 					</section>
+					<section>
+						<h3>Vocabulaire</h3>
+						<ul>
+							<li>Principes <strong>DevOps</strong></li>
+							<li>Continuous <strong>Integration</strong> : Intégration continue</li>
+							<li>Continuous <strong>Delivery</strong> : Livraison continue</li>
+							<li>Continuous <strong>Deployment</strong> : Déploiement Continu</li>
+						</ul>
+						<aside class="notes">
+							<p>
+								DevOps : intégrer des rpatiques d'échanges et d etravail collaboratif entre Devs et Exploitation (Operations) : Stabilité vs. Feature, dont l'intégration continue.<br>
+								Intégration continue : merge avec branch prod<br>
+								Livraison continue : push branch prod aux autres dev, mais pas forcement en production<br>
+								Intégration continue : push branch prod en production<br>
+
+							</p>
+						</aside>
+					</section>
 				</section>
 
 				<section>
@@ -152,12 +167,11 @@
 					<section>
 						<h3>1/ Hosted</h3>
 						<p>
-							Hébergé sur ses propres serveurs
-							<ul>
-								<li><img src="img/jenkins-logo+title.png" height="50px"></li>
-								<li><img src="img/Cruisecontrol.png" height="50px"></li>
-								<li>Apache Continuum, SonarQube, Tinderbox, TeamCity, ...</li>
-							</ul>
+							Hébergé sur ses propres serveurs<br>
+							<br>
+							<img src="img/jenkins-logo+title.png" height="100px"><br>
+							<img src="img/TinderBox-Logo-Dark-Large.png" height="100px"><br><br>
+							CruiseControl, Apache Continuum, SonarQube, Tinderbox, TeamCity, ...
 						</p>
 						<aside class="notes">
 							<p>
@@ -172,7 +186,7 @@
 							<ul>
 								<li>Anciennement Hudson</li>
 								<li>Java</li>
-								<li>(très) Nombreux plugins</li>
+								<li>(Très) nombreux plugins</li>
 							</ul>
 						</p>
 						<aside class="notes">
@@ -186,11 +200,12 @@
 						<h3>2/ SAAS</h3>
 						<p>
 							<strong>S</strong>oftware <strong>A</strong>s <strong>A</strong> <strong>S</strong>ervice<br>
-							<ul>
-								<li><img src="img/codeship.png" height="50px"></li>
-								<li><img src="img/travis-mascot-200px.png" height="50px"></li>
-								<li><img src="img/Circleci.png" height="50px">, ...</li>
-							</ul>
+							<br>
+							<img src="img/codeship.png" height="150px"><br>
+							<img src="img/travis-mascot-200px.png" height="100px"><br><br>
+							<img src="img/Circleci.png" height="100px"><br>
+							...
+
 						</p>
 						<aside class="notes">
 							<p>
@@ -202,12 +217,10 @@
 					</section>
 					<section>
 						<h3>3/ Et pour les mobiles ?</h3>
-						<p>
-							<ul>
-								<li><img src="img/shipio-logo.png" height="50px"></li>
-								<li><img src="img/hostedci-logo.png" height="50px"></li>
-								<li><img src="img/Logo_phonegap.png" height="50px"></li>
-							</ul>
+						<p><br><br>
+							<img src="img/shipio-logo.png" height="60px"><br><br>
+							<img src="img/hostedci-logo.png" height="30px"><br><br>
+							<img src="img/Logo_phonegap.png" height="150px">
 						</p>
 						<aside class="notes">
 							<p>
@@ -234,11 +247,11 @@
 					<section>
 						<h3>Push vers PAAS / Cloud</h3>
 						<p>
-							Envoi sur les plateformes d'hébergment cloud :<br>
-							<ul>
-								<li><img src="img/aws-logo.jpg" height="50px"></li>
-								<li><img src="img/heroku_logo.png" height="50px"></li>
-								<li>...</li>
+							Envoi sur les plateformes d'hébergment cloud<br>
+							<br>
+							<img src="img/aws-logo.png" height="250px"><br>
+							<img src="img/heroku_logo.png" height="250px"><br>
+							...
 							</ul>
 						</p>
 						<aside class="notes">
@@ -251,8 +264,7 @@
 						</aside>
 					</section>
 					<section>
-						<h3>Capistrano</h3>
-						<img src="img/CapistranoLogo.png" height="250px">
+						<h3><img src="img/CapistranoLogo.png" height="150px"></h3>
 						<aside class="notes">
 							<p>
 							Outil en Ruby qui clone un repo git, le transfert vers un ensemble de serveur et effectue les migrations DB.<br>
@@ -300,9 +312,11 @@ utilisation de scripts de maj (internes aux framework, fait maison via synchroni
 						<h2>Etude de cas<br><br>API "DirtyBranding"</h2>
 						<img src="img/capture-db.png.png" height="450px">
 					</section>
-					<section>
-						<h3>Recherche de marque (en mega-Alpha)
-						<br><br>API basée sur Silex<br><br>Utilisation de tests unitaires</h3>
+					<section data-background="img/db-logo.png" data-background-repeat="no-repeat" data-background-size="80%" style="background-color: rgba(255, 255, 255, 0.57);">
+						<p>Recherche de marque (en "Mega-Alpha")
+						<br><br>
+						API basée sur Silex<br><br>
+						Utilisation de tests unitaires</p>
 						<aside class="notes">
 							<p>
 								Silex : micro-framework basé sur Symfony
@@ -311,6 +325,7 @@ utilisation de scripts de maj (internes aux framework, fait maison via synchroni
 					</section>
 					<section>
 						<h3>Via Codeship</h3>
+						<img src="img/codeship_logo_large.png" height="350px">
 						<aside class="notes">
 							<p>
 								Effectuer la démo codeship : <br>
@@ -327,6 +342,7 @@ utilisation de scripts de maj (internes aux framework, fait maison via synchroni
 					</section>
 					<section>
 						<h3>Via Jenkins</h3>
+						<img src="img/jenkins-head.png" height="350px">
 						<aside class="notes">
 							<p>
 								Démo Jenkins :<br>
@@ -367,6 +383,8 @@ utilisation de scripts de maj (internes aux framework, fait maison via synchroni
 					<p>Références :</p>
 					<ul>
 						<li><a href="http://en.wikipedia.org/wiki/Continuous_delivery" target="_blank">Wikipedia - "Continuous Delivery"</a></li>
+						<li><a href="http://martinfowler.com/articles/continuousIntegration.html" target="_blank">Martin Fowler - "Continuous Integration"</a></li>
+						<li><a href="http://blog.octo.com/devops-de-lintegration-continue-au-deploiement-continu/" target="_blank">Octo Talks Blog - "DevOps, de l’intégration continue au déploiement continu"</a></li>
 						<li><a href="http://www.quora.com/What-is-the-difference-between-Bamboo-CircleCI-CIsimple-Ship-io-Codeship-Jenkins-Hudson-Semaphoreapp-Shippable-Solano-CI-TravisCI-and-Wercker" target="_blank">Quora - "Difference between CI tools"</a></li>
 						<li><a href="http://www.sitepoint.com/preparing-building-php-project-jenkins/" target="_blank">Sitepoint - "Jenkins"</a></li>
 						<li><a href="http://blog.pascal-martin.fr/post/integration-continue-jenkins-projet-php.html" target="_blank">Blog Pascal Martin - "Jenkins et PHP"</a></li>
