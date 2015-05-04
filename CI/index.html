@@ -71,7 +71,7 @@
 					<section>
 						<h3>Versionnement du code</h3>
 						<p>
-							<img src="img/Git_icon.svg.png" height="250px">
+							<img src="img/Git_icon.svg.png" height="300px">
 						</p>
 						<aside class="notes">
 							<p>
@@ -120,7 +120,9 @@ class MainTest extends WebTestCase
 						<p class="fragment fade-in" data-fragment-index="1">Tester l'ensemble de l'application à chaque release <br>
 						(donc chaque feature).</p>
 						<br><br>
-						<h4 class="fragment fade-in" data-fragment-index="2">Et après ?</h4>
+						<p class="fragment fade-in" data-fragment-index="2"><strong>Intégrer</strong> les modifs de la release dans l'application</p>
+						<br><br>
+						<h4 class="fragment fade-in" data-fragment-index="3">Et après ?</h4>
 						<aside class="notes">
 							<p>
 							Avoir un outil intermédiaire capable de récupérer le code source à chaque release, lancer et interpréter tous les tests de l'application permettant de confirmer la possibilité d'intégrer la feature dans le produit, avec pilotage sur exceptions (alerte si erreur, sinon reste silencieux).<br>
@@ -130,7 +132,7 @@ class MainTest extends WebTestCase
 						</aside>
 					</section>
 					<section>
-						<h3>Déploiement Continu</h3>
+						<h3>Déploiement Continu</h3><br><br>
 						<p>
 							Mettre à jour l'applicatif en production.
 						</p>
@@ -143,10 +145,10 @@ class MainTest extends WebTestCase
 					<section>
 						<h3>Vocabulaire</h3>
 						<ul>
-							<li>Principes <strong>DevOps</strong></li>
-							<li>Continuous <strong>Integration</strong> : Intégration continue</li>
-							<li>Continuous <strong>Delivery</strong> : Livraison continue</li>
-							<li>Continuous <strong>Deployment</strong> : Déploiement Continu</li>
+							<li class="fragment" data-fragment-index="1">Principes <strong>DevOps</strong></li>
+							<li class="fragment" data-fragment-index="2">Continuous <strong>Integration</strong> : Intégration continue</li>
+							<li class="fragment" data-fragment-index="3">Continuous <strong>Delivery</strong> : Livraison continue</li>
+							<li class="fragment" data-fragment-index="4">Continuous <strong>Deployment</strong> : Déploiement continu</li>
 						</ul>
 						<aside class="notes">
 							<p>
@@ -167,11 +169,11 @@ class MainTest extends WebTestCase
 					<section>
 						<h3>1/ Hosted</h3>
 						<p>
-							Hébergé sur ses propres serveurs<br>
+							Hébergé sur nos propres serveurs<br>
 							<br>
-							<img src="img/jenkins-logo+title.png" height="100px"><br>
+							<img src="img/jenkins-logo+title.png" height="150px"><br>
 							<img src="img/TinderBox-Logo-Dark-Large.png" height="100px"><br><br>
-							CruiseControl, Apache Continuum, SonarQube, Tinderbox, TeamCity, ...
+							<em>Ou encore : CruiseControl, Apache Continuum, SonarQube, Tinderbox, TeamCity, ...</em>
 						</p>
 						<aside class="notes">
 							<p>
@@ -183,10 +185,10 @@ class MainTest extends WebTestCase
 						<h3>Jenkins</h3>
 						<img src="img/jenkins-head.png" height="250px">
 						<p>
-							<ul>
-								<li>Anciennement Hudson</li>
-								<li>Java</li>
-								<li>(Très) nombreux plugins</li>
+							<br><br>
+							Anciennement <strike>Hudson</strike><br><br>
+							En Java<br><br>
+							Plugins (très) nombreux
 							</ul>
 						</p>
 						<aside class="notes">
@@ -250,7 +252,7 @@ class MainTest extends WebTestCase
 							Envoi sur les plateformes d'hébergment cloud<br>
 							<br>
 							<img src="img/aws-logo.png" height="250px"><br>
-							<img src="img/heroku_logo.png" height="250px"><br>
+							<img src="img/heroku_logo.png" height="200px"><br>
 							...
 							</ul>
 						</p>
@@ -288,7 +290,7 @@ utilisation de scripts de maj (internes aux framework, fait maison via synchroni
 						</aside>
 					</section>
 					<section>
-						<h3>Tests HTML<br><br>Tests d'affichage</h3>
+						<h3>Tests Frontend (JS, CSS, HTML)<br><br>Tests d'affichage</h3>
 						<aside class="notes">
 						<p>
 							tests unitaire via Bower, Angular, Jasmine (JS), ou lint CSS / HTML.<br>
@@ -297,11 +299,11 @@ utilisation de scripts de maj (internes aux framework, fait maison via synchroni
 						</aside>
 					</section>
 					<section>
-						<h3>Impact sur l'application<br><br>Gestion des vhosts</h3>
+						<h3>Impact sur l'application</h3>
 						<aside class="notes">
 						<p>
-							Nécessite une adaptation de l'app (gestion des fichiers de config avec accès BDD, etc).<br>
-							Vhosts : pas dans le champs car tests internes à l'app, non lié à l'hébergement. Mais
+							Nécessite une adaptation de l'app (TU, gestion des fichiers de config avec accès BDD soit différents environnements, etc).<br>
+							Vhosts : pas dans le champs car tests internes à l'app, non liés à l'hébergement. Mais
 						</p>
 						</aside>
 					</section>
@@ -312,8 +314,8 @@ utilisation de scripts de maj (internes aux framework, fait maison via synchroni
 						<h2>Etude de cas<br><br>API "DirtyBranding"</h2>
 						<img src="img/capture-db.png.png" height="450px">
 					</section>
-					<section data-background="img/db-logo.png" data-background-repeat="no-repeat" data-background-size="80%" style="background-color: rgba(255, 255, 255, 0.57);">
-						<p>Recherche de marque (en "Mega-Alpha")
+					<section data-background="img/db-logo.png" data-background-repeat="no-repeat" data-background-size="80%" style="background-color: rgba(255, 255, 255, 0.93);">
+						<p>Recherche de marque (en "mega-alpha")
 						<br><br>
 						API basée sur Silex<br><br>
 						Utilisation de tests unitaires</p>
