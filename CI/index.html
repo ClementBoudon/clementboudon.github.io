@@ -56,9 +56,9 @@
 						<h2>Principes de base</h2>
 					</section>
 					<section>
-						<h3>Développement moderne</h3>
+						<h3>Le développement moderne</h3>
 						<p class="fragment fade-in" data-fragment-index="1"><strong>Avant</strong> : 1 release = plusieurs features<br></p>
-						<p class="fragment fade-in" data-fragment-index="2"><strong>Maintenant</strong> : 1 feature = 1 release<br></p>
+						<p class="fragment fade-in" data-fragment-index="2"><strong>Maintenant</strong> : 1 release = 1 feature<br></p>
 						<p class="fragment fade-in" data-fragment-index="3"><strong>Problème</strong> : Stabilité vs Réactivité</p>
 						<aside class="notes">
 							<p>
@@ -69,22 +69,32 @@
 						</aside>
 					</section>
 					<section>
-						<h3>Versionnement du code</h3>
+						<h4>De nouveaux outils :<h4>
+						<h3>POO</h3>
 						<p>
-							<img src="img/Git_icon.svg.png" height="300px">
+							Découpage par modules testables individuellement.
 						</p>
+<pre><code data-trim class="php" style="max-height: 450px;">
+class App
+{
+    public function createApplication()
+    {
+        $app = require __DIR__.'/../../../app.php';
+        return $app;
+    }
+}
+</code></pre>
 						<aside class="notes">
 							<p>
-							Utilisation des outils de versionnement du code (decentralisés ou non), permettant à différentes entitées (humain ou non) d'accéder au code source du projet.<br>
-								+ Gestion de branche, tests/controles propres à certaines features
+							Développement objet permet découpage par modules, testables individuellement, facilitant les tests automatisables.<br>
+								Tests unitaires / fonctionnels : app hérite de classes phpunit, puis lancement script via CLI phpunit capable d'interpréter les retours standardisés.<br>
+								Stephane abordera cela plus complètement lors des formations internes ZF2.
 							</p>
 						</aside>
 					</section>
 					<section>
-						<h3>POO et Tests Unitaires</h3>
-						<p>
-							Développement objet : découpage par modules testables individuellement.
-						</p>
+						<h4>De nouveaux outils :<h4>
+						<h3>Tests Unitaires</h3>
 <pre><code data-trim class="php" style="max-height: 450px;">
 use Silex\WebTestCase;
 
@@ -106,21 +116,35 @@ class MainTest extends WebTestCase
     }
 }
 </code></pre>
+						<p>
+						Pouvoir tester automatiquement l'intégralité de l'application dans un contexte de production.</p>
+
 						<aside class="notes">
 							<p>
-							Développement objet permet découpage par modules, testables individuellement, facilitant les tests automatisables.<br>
-								Tests unitaires / fonctionnels : app hérite de classes phpunit, puis lancement script via CLI phpunit capable d'interpréter les retours standardisés.<br>
-								Stephane abordera cela plus complètement lors des formations internes ZF2.
+								Le premier outil : jouer les tests uniaires dans un contexte le plus proche possible de la prod.
+							</p>
+						</aside>
+					</section>
+					<section>
+						<h4>De nouveaux outils :<h4>
+						<h3>Versionnement du code</h3>
+						<p>
+							<img src="img/Git_icon.svg.png" height="300px">
+						</p>
+						<aside class="notes">
+							<p>
+							Utilisation des outils de versionnement du code (decentralisés ou non), permettant à différentes entitées (humain ou non) d'accéder au code source du projet.<br>
+								+ Gestion de branche, tests/controles propres à certaines features
 							</p>
 						</aside>
 					</section>
 					<section>
 						<h3>Intégration Continue</h3>
 						<br><br>
-						<p class="fragment fade-in" data-fragment-index="1">Tester l'ensemble de l'application à chaque release <br>
+						<p class="fragment fade-in" data-fragment-index="1"><strong>Tester</strong> systématiquement l'ensemble de l'application à chaque release <br>
 						(donc chaque feature).</p>
 						<br><br>
-						<p class="fragment fade-in" data-fragment-index="2"><strong>Intégrer</strong> les modifs de la release dans l'application</p>
+						<p class="fragment fade-in" data-fragment-index="2">Pour valider l'<strong>intégration</strong> de la release en production.</p>
 						<br><br>
 						<h4 class="fragment fade-in" data-fragment-index="3">Et après ?</h4>
 						<aside class="notes">
@@ -167,9 +191,26 @@ class MainTest extends WebTestCase
 						<h2>Les outils d'intégration continue</h2>
 					</section>
 					<section>
+						<h3>Qu'est-ce qu'un outil d'intégration continue ?</h3>
+						<br><br>
+
+						<p class="fragment" data-fragment-index="1">
+							Applicatif qui va <strong>automatiquement jouer les tests</strong> sur la dernière version de l'application et <strong>confirmer la validitié</strong> de l'application.</p>
+							<br><br>
+							<p class="fragment" data-fragment-index="2">
+								(et même un peu plus : fournir une interface web de consultation, contrôler la qualité du code, automatiser le déploiement, ...)
+							</p>
+
+						<aside class="notes">
+							<p>
+								Le premier outil : jouer les tests uniaires dans un contexte le plus proche possible de la prod.
+							</p>
+						</aside>
+					</section>
+					<section>
 						<h3>1/ Hosted</h3>
 						<p>
-							Hébergé sur nos propres serveurs<br>
+							Hébergé sur ses propres serveurs<br>
 							<br>
 							<img src="img/jenkins-logo+title.png" height="150px"><br>
 							<img src="img/TinderBox-Logo-Dark-Large.png" height="100px"><br><br>
@@ -236,7 +277,7 @@ class MainTest extends WebTestCase
 
 				<section>
 					<section>
-						<h2>Les outils de déploiement continu</h2>
+						<h2>Les méthodes de déploiement continu</h2>
 					</section>
 					<section>
 						<h3>EN FTP, SFTP, SSH</h3>
@@ -282,7 +323,14 @@ class MainTest extends WebTestCase
 						<h2>Problématiques</h2>
 					</section>
 					<section>
-						<h3>Migration BDD</h3>
+						<h3>Migration BDD ?</h3>
+						<p class="fragment" data-fragment-index="1">
+							Outils de migration des ORM <pre class="fragment" data-fragment-index="1"><code data-trim class="shell fragment" data-fragment-index="1">php app/console doctrine:migrations:migrate</code></pre><br>
+
+							</p>
+							<p class="fragment" data-fragment-index="2">
+							Gestion de scripts SQL de migration et de hooks / scripts shell, ...
+							</p>
 						<aside class="notes">
 							<p>
 utilisation de scripts de maj (internes aux framework, fait maison via synchronisation fichier de miration.sql à chaque feature + script bash joué à chauqe déploiement)
@@ -290,7 +338,17 @@ utilisation de scripts de maj (internes aux framework, fait maison via synchroni
 						</aside>
 					</section>
 					<section>
-						<h3>Tests Frontend (JS, CSS, HTML)<br><br>Tests d'affichage</h3>
+						<h3>Tests Frontend (JS, CSS, HTML) ?</h3><br>
+						<p class="fragment" data-fragment-index="1">
+							Tests uniaitres du code JS (via Bower, Angular, Jasmine, ... ) et lint CSS / HTML
+
+						</p><br><br><br>
+						<h3>Tests d'affichage ?</h3><br>
+						<p class="fragment" data-fragment-index="2">
+							Outils expérimentaux (DPXDT)
+
+						</p>
+
 						<aside class="notes">
 						<p>
 							tests unitaire via Bower, Angular, Jasmine (JS), ou lint CSS / HTML.<br>
@@ -299,7 +357,18 @@ utilisation de scripts de maj (internes aux framework, fait maison via synchroni
 						</aside>
 					</section>
 					<section>
-						<h3>Impact sur l'application</h3>
+						<h3>Impact sur l'application ?</h3><br>
+						<p>
+							<span class="fragment" data-fragment-index="1">
+								Avoir une application <strong>testable</strong>
+							</span>
+							<span class="fragment" data-fragment-index="2">
+							 	et <strong>testée</strong>.
+							 </span><br><br>
+							 <span class="fragment" data-fragment-index="3">
+							 	Configuration adaptative en fonction de l'environnement.
+							 </span>
+						</p>
 						<aside class="notes">
 						<p>
 							Nécessite une adaptation de l'app (TU, gestion des fichiers de config avec accès BDD soit différents environnements, etc).<br>
@@ -311,14 +380,16 @@ utilisation de scripts de maj (internes aux framework, fait maison via synchroni
 
 				<section>
 					<section>
-						<h2>Etude de cas<br><br>API "DirtyBranding"</h2>
+						<h2>Etude de cas<br><br>API "Dirty Branding"</h2>
 						<img src="img/capture-db.png.png" height="450px">
 					</section>
-					<section data-background="img/db-logo.png" data-background-repeat="no-repeat" data-background-size="80%" style="background-color: rgba(255, 255, 255, 0.93);">
-						<p>Recherche de marque (en "mega-alpha")
+					<section>
+						<p>Vérification de disponibilité de marque et de domaines <br>(en "mega-alpha")
 						<br><br>
 						API basée sur Silex<br><br>
-						Utilisation de tests unitaires</p>
+						Utilisation de tests unitaires<br><br>
+						Code source hébergé sur Github<br><br>
+						En production sur serveur mutu OVH</p>
 						<aside class="notes">
 							<p>
 								Silex : micro-framework basé sur Symfony
@@ -326,7 +397,7 @@ utilisation de scripts de maj (internes aux framework, fait maison via synchroni
 						</aside>
 					</section>
 					<section>
-						<h3>Via Codeship</h3>
+						<h3>Via Codeship</h3><br>
 						<img src="img/codeship_logo_large.png" height="350px">
 						<aside class="notes">
 							<p>
@@ -343,7 +414,7 @@ utilisation de scripts de maj (internes aux framework, fait maison via synchroni
 						</aside>
 					</section>
 					<section>
-						<h3>Via Jenkins</h3>
+						<h3>Via Jenkins</h3><br>
 						<img src="img/jenkins-head.png" height="350px">
 						<aside class="notes">
 							<p>
