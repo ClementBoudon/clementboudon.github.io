@@ -75,11 +75,11 @@
 							Découpage par modules testables individuellement.
 						</p>
 <pre><code data-trim class="php" style="max-height: 450px;">
-class App
+class MainApp
 {
     public function createApplication()
     {
-        $app = require __DIR__.'/../../../app.php';
+        $app = require __DIR__.'app.php';
         return $app;
     }
 }
@@ -102,7 +102,7 @@ class MainTest extends WebTestCase
 {
     public function createApplication()
     {
-        $app = require __DIR__.'/../../../app.php';
+        $app = require __DIR__.'app.php';
         return $app;
     }
 
@@ -142,11 +142,11 @@ class MainTest extends WebTestCase
 						<h3>Intégration Continue</h3>
 						<br><br>
 						<p class="fragment fade-in" data-fragment-index="1"><strong>Tester</strong> systématiquement l'ensemble de l'application à chaque release <br>
-						(donc chaque feature).</p>
+						<em>(donc chaque feature).</em></p>
 						<br><br>
 						<p class="fragment fade-in" data-fragment-index="2">Pour valider l'<strong>intégration</strong> de la release en production.</p>
 						<br><br>
-						<h4 class="fragment fade-in" data-fragment-index="3">Et après ?</h4>
+						<h3 class="fragment fade-in" data-fragment-index="3">Et après ?</h3>
 						<aside class="notes">
 							<p>
 							Avoir un outil intermédiaire capable de récupérer le code source à chaque release, lancer et interpréter tous les tests de l'application permettant de confirmer la possibilité d'intégrer la feature dans le produit, avec pilotage sur exceptions (alerte si erreur, sinon reste silencieux).<br>
@@ -157,8 +157,8 @@ class MainTest extends WebTestCase
 					</section>
 					<section>
 						<h3>Déploiement Continu</h3><br><br>
-						<p>
-							Mettre à jour l'applicatif en production.
+						<p class="fragment fade-in" data-fragment-index="1">
+							<strong>Déployer</strong> l'applicatif en production.
 						</p>
 						<aside class="notes">
 							<p>
@@ -195,10 +195,10 @@ class MainTest extends WebTestCase
 						<br><br>
 
 						<p class="fragment" data-fragment-index="1">
-							Applicatif qui va <strong>automatiquement jouer les tests</strong> sur la dernière version de l'application et <strong>confirmer la validitié</strong> de l'application.</p>
+							Applicatif qui va <strong>automatiquement jouer les tests</strong> sur la dernière version de l'application et <strong>confirmer sa validité</strong>.</p>
 							<br><br>
 							<p class="fragment" data-fragment-index="2">
-								(et même un peu plus : fournir une interface web de consultation, contrôler la qualité du code, automatiser le déploiement, ...)
+								(et même un peu plus : fournir une interface web de suivi, contrôler la qualité du code, automatiser le déploiement, ...)
 							</p>
 
 						<aside class="notes">
@@ -210,15 +210,16 @@ class MainTest extends WebTestCase
 					<section>
 						<h3>1/ Hosted</h3>
 						<p>
-							Hébergé sur ses propres serveurs<br>
+							Hébergé sur un serveur interne.<br>
 							<br>
-							<img src="img/jenkins-logo+title.png" height="150px"><br>
-							<img src="img/TinderBox-Logo-Dark-Large.png" height="100px"><br><br>
-							<em>Ou encore : CruiseControl, Apache Continuum, SonarQube, TeamCity, ...</em>
+							<a href="https://jenkins-ci.org/" target="_blank"><img src="img/jenkins-logo+title.png" height="150px"></a><br>
+							<a href="http://cruisecontrol.sourceforge.net/" target="_blank"><img src="img/Cruisecontrol.png" height="100px"></a>
+							<br><br>
+							<em>Ou encore : <a href="https://developer.mozilla.org/en-US/docs/Tinderbox" target="_blank">Tinderbox</a>, <a href="https://continuum.apache.org/" target="_blank">Apache Continuum</a>, <a href="http://www.sonarqube.org/" target="_blank">SonarQube</a>, <a href="https://www.jetbrains.com/teamcity/" target="_blank">TeamCity</a>, ...</em>
 						</p>
 						<aside class="notes">
 							<p>
-
+							Tinderbox modzilla
 							</p>
 						</aside>
 					</section>
@@ -244,9 +245,9 @@ class MainTest extends WebTestCase
 						<p>
 							<strong>S</strong>oftware <strong>A</strong>s <strong>A</strong> <strong>S</strong>ervice<br>
 							<br>
-							<img src="img/codeship.png" height="150px"><br>
-							<img src="img/travis-mascot-200px.png" height="100px"><br><br>
-							<img src="img/Circleci.png" height="100px"><br>
+							<a href="https://codeship.com/" target="_blank"><img src="img/codeship.png" height="150px"></a><br>
+							<a href="https://travis-ci.org/" target="_blank"><img src="img/travis-mascot-200px.png" height="100px"></a><br><br>
+							<a href="https://circleci.com/" target="_blank"><img src="img/Circleci.png" height="100px"></a><br>
 							...
 
 						</p>
@@ -261,9 +262,9 @@ class MainTest extends WebTestCase
 					<section>
 						<h3>3/ Et pour les mobiles ?</h3>
 						<p><br><br>
-							<img src="img/shipio-logo.png" height="60px"><br><br>
-							<img src="img/hostedci-logo.png" height="30px"><br><br>
-							<img src="img/Logo_phonegap.png" height="150px">
+							<a href="https://ship.io/" target="_blank"><img src="img/shipio-logo.png" height="60px"></a><br><br>
+							<a href="https://hosted-ci.com/" target="_blank"><img src="img/hostedci-logo.png" height="30px"></a><br><br>
+							<a href="http://phonegap.com/" target="_blank"><img src="img/Logo_phonegap.png" height="150px"></a>
 						</p>
 						<aside class="notes">
 							<p>
@@ -290,10 +291,10 @@ class MainTest extends WebTestCase
 					<section>
 						<h3>Push vers PAAS / Cloud</h3>
 						<p>
-							Envoi sur les plateformes d'hébergment cloud<br>
+							Déploiement sur les plateformes d'hébergment cloud<br>
 							<br>
-							<img src="img/aws-logo.png" height="250px"><br>
-							<img src="img/heroku_logo.png" height="200px"><br>
+							<a href="http://aws.amazon.com/fr/" target="_blank"><img src="img/aws-logo.png" height="250px"></a><br>
+							<a href="https://www.heroku.com/" target="_blank"><img src="img/heroku_logo.png" height="200px"></a><br>
 							...
 							</ul>
 						</p>
@@ -307,7 +308,7 @@ class MainTest extends WebTestCase
 						</aside>
 					</section>
 					<section>
-						<h3><img src="img/CapistranoLogo.png" height="150px"></h3>
+						<h3><a href="http://capistranorb.com/" target="_blank"><img src="img/CapistranoLogo.png" height="150px"></a></h3>
 						<aside class="notes">
 							<p>
 							Outil en Ruby qui clone un repo git, le transfert vers un ensemble de serveur et effectue les migrations DB.<br>
@@ -324,6 +325,7 @@ class MainTest extends WebTestCase
 					</section>
 					<section>
 						<h3>Migration BDD ?</h3>
+						<br>
 						<p class="fragment" data-fragment-index="1">
 							Outils de migration des ORM <pre class="fragment" data-fragment-index="1"><code data-trim class="shell fragment" data-fragment-index="1">php app/console doctrine:migrations:migrate</code></pre><br>
 
@@ -340,24 +342,25 @@ utilisation de scripts de maj (internes aux framework, fait maison via synchroni
 					<section>
 						<h3>Tests Frontend (JS, CSS, HTML) ?</h3><br>
 						<p class="fragment" data-fragment-index="1">
-							Tests uniaitres du code JS (via Bower, Angular, Jasmine, ... ) et lint CSS / HTML
+							Tests unitaires du code JS (via <a href="http://bower.io/" target="_blank">Bower</a>, <a href="https://angularjs.org/" target="_blank">AngularJS</a>, <a href="http://jasmine.github.io/" target="_blank">Jasmine</a>, ... ) et lint CSS / HTML
 
 						</p><br><br><br>
 						<h3>Tests d'affichage ?</h3><br>
 						<p class="fragment" data-fragment-index="2">
-							Outils expérimentaux (DPXDT)
+							Outils expérimentaux (<a href="https://github.com/bslatkin/dpxdt" target="_blank">DPXDT</a>)
 
 						</p>
 
 						<aside class="notes">
 						<p>
 							tests unitaire via Bower, Angular, Jasmine (JS), ou lint CSS / HTML.<br>
+							Lint : Controle syntaxique du code (error mais aussi warning)<br>
 							Plus poussés en phase expérimentale (comparaison screenshot via DPXDT, Selenium)
 						</p>
 						</aside>
 					</section>
 					<section>
-						<h3>Impact sur l'application ?</h3><br>
+						<h3>Impacts sur l'application ?</h3><br>
 						<p>
 							<span class="fragment" data-fragment-index="1">
 								Avoir une application <strong>testable</strong>
@@ -380,16 +383,18 @@ utilisation de scripts de maj (internes aux framework, fait maison via synchroni
 
 				<section>
 					<section>
-						<h2>Etude de cas<br><br>API "Dirty Branding"</h2>
+						<h2>Etude de cas</h2>
+						<h4>API "Dirty Branding"</h4>
 						<img src="img/capture-db.png.png" height="450px">
 					</section>
 					<section>
-						<p>Vérification de disponibilité de marque et de domaines <br>(en "mega-alpha")
+						<h3>Dirty Branding</h3><br>
+						<p style="font-size: 80%;">Vérification de disponibilité de marque et de domaine<br><em>(en "mega-alpha")</em>
 						<br><br>
-						API basée sur Silex<br><br>
-						Utilisation de tests unitaires<br><br>
-						Code source hébergé sur Github<br><br>
-						En production sur serveur mutu OVH</p>
+						<strong>API</strong> basée sur Silex<br><br>
+						Utilisation de <strong>tests unitaires</strong><br><br>
+						Code source hébergé sur <strong>Github</strong><br><br>
+						En production sur serveur <strong>mutualisé OVH</strong></p>
 						<aside class="notes">
 							<p>
 								Silex : micro-framework basé sur Symfony
@@ -455,8 +460,8 @@ utilisation de scripts de maj (internes aux framework, fait maison via synchroni
 					<br>
 					<p>Références :</p>
 					<ul>
-						<li><a href="http://en.wikipedia.org/wiki/Continuous_delivery" target="_blank">Wikipedia - "Continuous Delivery"</a></li>
 						<li><a href="http://martinfowler.com/articles/continuousIntegration.html" target="_blank">Martin Fowler - "Continuous Integration"</a></li>
+						<li><a href="http://en.wikipedia.org/wiki/Continuous_delivery" target="_blank">Wikipedia - "Continuous Delivery"</a></li>
 						<li><a href="http://blog.octo.com/devops-de-lintegration-continue-au-deploiement-continu/" target="_blank">Octo Talks Blog - "DevOps, de l’intégration continue au déploiement continu"</a></li>
 						<li><a href="http://www.quora.com/What-is-the-difference-between-Bamboo-CircleCI-CIsimple-Ship-io-Codeship-Jenkins-Hudson-Semaphoreapp-Shippable-Solano-CI-TravisCI-and-Wercker" target="_blank">Quora - "Difference between CI tools"</a></li>
 						<li><a href="http://www.sitepoint.com/preparing-building-php-project-jenkins/" target="_blank">Sitepoint - "Jenkins"</a></li>
