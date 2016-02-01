@@ -54,68 +54,558 @@
 					</aside>
 				</section>
 
+
+
 				<section>
+					<section>
+						<h1>Rappels</h1>
+					</section>
 
-					<section data-markdown>
-					    <script type="text/template">
-					       ## Sommaire détaillé - part 1
-1. Rappel :
-  1. SPA
-  2. Framework MVC (Angular)
-					    </script>
-					</section>
-					<section data-markdown>
-					    <script type="text/template">
-					       ## Sommaire détaillé - part 2
-  3. V *via* React
-    1. Composant, Composant everywhere (découpe unitaire, gère l'affichage des éléments composant une app, methode render() retournant l'affichage)
-    2. Des props... (données non modifiables, transmises par le "owner")
-    3. ... et des states (données modifiable spar le composant - donc l'utilisateur). React maintient l'affichage à jour en cas de changement de state)
-    4. (et puis des méthodes)
+					<section>
 
-					    </script>
+						<p>
+							<strong>S</strong>ingle <strong>P</strong>age <strong>A</strong>pplication
+						</p>
+
+						<aside class="notes">
+							<p>
+							Single Page Application : Application sur une seule page (mais plusieurs panneaux / panels), côté client. <br>
+							Echange avec sereur via API.
+							</p>
+						</aside>
 					</section>
-					<section data-markdown>
-					    <script type="text/template">
-					       ## Sommaire détaillé - part 3
-   3. ...V *via* React
-    5. VirtualDOM (render dans un contexte donné, cc React Native) et isomorphisme
-    6. JSX conseillé (efficacité et lisibilité), mais pas obligatoire
-    7. Data flow uni-directionnel (même si on peut faire du bi-directionnel vers parents, grâce à des méthodes connues via des props, et donc peut être inclus dans une archi basée sur Angular)
-  4. Pas vraiement MVC finalement, mais du flux (ou du Relay et du GraphQL)
-					    </script>
+					<section>
+
+						<p>Framework MVC</p>
+
+						<aside class="notes">
+							<p>
+							Nécessité de structurer le code pour le rendre maintenable. <br>
+							Design Patern le plus fréquent MVC. Modèle / Vue / Controlleur. <br>
+							Backbone, Angular.
+							</p>
+						</aside>
 					</section>
-					<section data-markdown>
-					    <script type="text/template">
-					       ## Sommaire détaillé - part 4
-2. React Native
-  1. Histoire
-  2. Des composants comme React et grace au virtualDOM on peut faire du mobile en convertissant en composants natifs (pas de div : à valider)
-  3. Du style (flex, en JS car nécessité de répondre à des contraintes posées par CSS web)
-  4. Du natif si besoin
-  5. et l'export ? (ios : projet xCode avec quelques petites modifs de config / Android cd android && ./gradlew assembleRelease`)
-					    </script>
-					</section>
-					<section data-markdown>
-					    <script type="text/template">
-					       ## Sommaire détaillé - part 5
-3. Demo Time!
-4. Et si on utilisait Cordova ?
-  1. React Native est *concurrent* de Cordova
-  2. On peut avoir du React dans web app (en ligne) donc dans Cordova puisqu'il s'agit d'une webview, mais pas React Native
-  3. et Angular derrière React Native ?
-					    </script>
+					<section>
+
+						<p>
+							<strong>V</strong>ue <em>via</em> React
+						</p>
+
+						<aside class="notes">
+							<p>
+
+							</p>
+						</aside>
 					</section>
 				</section>
+				<section>
+					<section>
 
+						<h2>React</h2>
+
+						<aside class="notes">
+							<p>
+								Rappel plus précis sur React. Pas React Native encore. <br>
+								But : gérer la vue, les éléments graphiques présentés à l'utilisateur et enregistrant ses retours.<br>
+								Intégration code js react.js et react-dom.js
+
+							</p>
+						</aside>
+					</section>
+					<section>
+
+						<img src="img/meme-components.jpg">
+
+						<aside class="notes">
+							<p>
+								Découpe unitaire, gère l'affichage des éléments composant une app, methode render() retournant l'affichage.
+							</p>
+						</aside>
+					</section>
+					<section>
+
+						<pre><code data-trim data-noescape class="javascript">
+var ComposantInter = React.createClass({
+  render: function() {
+    return (
+      &lt;div className=&quot;composantInterativ&quot;&gt;
+        Hello, world! I am an Interactiv component.
+      &lt;/div&gt;
+    );
+  }
+});
+						</code></pre>
+
+						<aside class="notes">
+							<p>
+								Découpe unitaire, gère l'affichage des éléments composant une app, methode render() retournant l'affichage.
+							</p>
+						</aside>
+					</section>
+					<section>
+
+						<p>
+							Des Props...
+						</p>
+						<pre><code data-trim data-noescape class="javascript">
+var Comment = React.createClass({
+  render: function() {
+    return (
+      &lt;div className=&quot;comment&quot;&gt;
+        &lt;h2 className=&quot;commentAuthor&quot;&gt;
+          {this.props.author}
+        &lt;/h2&gt;
+        {this.props.children}
+      &lt;/div&gt;
+    );
+  }
+});
+
+var CommentList = React.createClass({
+  render: function() {
+    return (
+      &lt;div className=&quot;commentList&quot;&gt;
+        &lt;Comment author=&quot;Pete Hunt&quot;&gt;This is one comment&lt;/Comment&gt;
+        &lt;Comment author=&quot;Jordan Walke&quot;&gt;This is *another* comment&lt;/Comment&gt;
+      &lt;/div&gt;
+    );
+  }
+});
+						</code></pre>
+						<aside class="notes">
+							<p>
+								Données non modifiables, transmises par le "owner"
+							</p>
+						</aside>
+					</section>
+					<section>
+
+						<p>
+							States
+						</p>
+						<pre><code data-trim data-noescape class="javascript">
+var CommentForm = React.createClass({
+  getInitialState: function() {
+    return {author: '', text: ''};
+  },
+  handleAuthorChange: function(e) {
+    this.setState({author: e.target.value});
+  },
+  handleTextChange: function(e) {
+    this.setState({text: e.target.value});
+  },
+  render: function() {
+    return (
+      &lt;form className=&quot;commentForm&quot;&gt;
+        &lt;input
+          type=&quot;text&quot;
+          placeholder=&quot;Your name&quot;
+          value={this.state.author}
+          onChange={this.handleAuthorChange}
+        /&gt;
+        &lt;input
+          type=&quot;text&quot;
+          placeholder=&quot;Say something...&quot;
+          value={this.state.text}
+          onChange={this.handleTextChange}
+        /&gt;
+        &lt;input type=&quot;submit&quot; value=&quot;Post&quot; /&gt;
+      &lt;/form&gt;
+    );
+  }
+});
+						</code></pre>
+
+						<aside class="notes">
+							<p>
+								Données modifiable spar le composant - donc l'utilisateur). React maintient l'affichage à jour en cas de changement de state
+							</p>
+						</aside>
+					</section>
+					<section>
+
+						<p>
+							(et puis des methodes)
+						</p>
+						<pre><code data-trim data-noescape class="javascript">
+var CommentForm = React.createClass({
+  getInitialState: function() {
+    return {author: '', text: ''};
+  },
+  handleAuthorChange: function(e) {
+    this.setState({author: e.target.value});
+  },
+  handleTextChange: function(e) {
+    this.setState({text: e.target.value});
+  },
+  componentDidMount: function(e) {
+    // Your code here
+  },
+  render: function() {
+    return (
+      &lt;form className=&quot;commentForm&quot;&gt;
+        &lt;input
+          type=&quot;text&quot;
+          placeholder=&quot;Your name&quot;
+          value={this.state.author}
+          onChange={this.handleAuthorChange}
+        /&gt;
+        &lt;input
+          type=&quot;text&quot;
+          placeholder=&quot;Say something...&quot;
+          value={this.state.text}
+          onChange={this.handleTextChange}
+        /&gt;
+        &lt;input type=&quot;submit&quot; value=&quot;Post&quot; /&gt;
+      &lt;/form&gt;
+    );
+  }
+});
+						</code></pre>
+
+
+						<aside class="notes">
+							<p>
+								Propres à un composant.<br>
+								Initialise<br>
+								DidMount
+							</p>
+						</aside>
+					</section>
+					<section>
+
+						<p>
+							VirtualDOM et isomorphisme
+						</p>
+
+						<aside class="notes">
+							<p>
+								render dans un contexte donné, cc React Native
+							</p>
+						</aside>
+					</section>
+					<section>
+
+						<p>
+							JSX
+						</p>
+						<pre><code data-trim data-noescape class="javascript">
+var ComposantInter = React.createClass({
+  render: function() {
+    return (
+      &lt;div className=&quot;composantInterativ&quot;&gt;
+        Hello, world! I am an Interactiv component.
+      &lt;/div&gt;
+    );
+  }
+});
+						</code></pre>
+						<pre><code data-trim data-noescape class="javascript">
+var ComposantInter = React.createClass({displayName: 'ComposantInter',
+  render: function() {
+    return (
+      React.createElement('div', {className: "ComposantInter"},
+        "Hello, world! I am an Interactiv component."
+      )
+    );
+  }
+});
+						</code></pre>
+
+
+						<aside class="notes">
+							<p>
+								XML lique pour lisibilité, pas obligatoire, vanilla JS possible, ou utilisation babel js pour interprétation live ou  compiler build js (grunt, gulp...)
+							</p>
+						</aside>
+					</section>
+					<section>
+
+						<p>
+							Data flow unidirectionnel
+						</p>
+
+						<aside class="notes">
+							<p>
+								Facebook choix données uni-directionnel (données reçues du parent, transmises aux enfant) pour facilité découpe en composant. <br>Même si on peut faire du bi-directionnel vers parents, grâce à des méthodes connues via des props, et donc peut être inclus dans une archi basée sur Angular
+							</p>
+						</aside>
+					</section>
+					<section>
+
+						<p>
+							Flux plutôt que MVC
+						</p>
+
+						<aside class="notes">
+							<p>
+								Mais comment gérer la remontée de données ? Flow Flux : View -> Action -> Dispatcher -> Store -> View.<br>
+								Gestion des donnéeses globales via Relay et GraphQL.<br>
+								S'éloigne de MVC mais possible intégration dans Angular (ngReact) pour remplacer les directives Angular.<br>
+							</p>
+						</aside>
+					</section>
+				</section>
+				<section>
+
+					<section>
+
+						<h2>
+							React Native
+						</h2>
+
+						<aside class="notes">
+							<p>
+
+							</p>
+						</aside>
+					</section>
+					<section>
+
+						<p>
+							Problématiques
+						</p>
+
+						<aside class="notes">
+							<p>
+								React présenté en 2013.<br>
+								React native 2015, d'abord iOS puis Android.<br>
+								React utiliser massivement chez Facebook, mais pas que web.<br>
+								Facebook a choisi hybride puis natif (user XP).<br>
+								Mais workflow dev mobile lourd a ralenti leurs équipes.<br>
+								Réact créant une abstraction du DOM, via son code déclaratif (juste des descriptions de composant à un état donné) et son DOM virtuel, au lieux de générer des div et span, pourrait générer des composants natifs, ios ou android.<br>
+								Conserve un seul code js React.<br>
+								Dans appli, moteur JavaScriptCore (=/= webview) générant les composants natifs. Bénéfice du multi thread (car non bloquant) + éléments natifs.
+
+							</p>
+						</aside>
+					</section>
+					<section>
+
+						<p>
+							Concrètement
+						</p>
+
+						<p class="fragment fade-in">
+						 <code>npm install -g react-native-cli</code>
+						</p>
+						<p class="fragment fade-in">
+						 <code>react-native init AwesomeProject</code>
+						</p>
+						<p class="fragment fade-in">
+						 Build dans Xcode
+						</p>
+						<p class="fragment fade-in">
+						 <code>react-native run-android</code>
+						</p>
+						<aside class="notes">
+							<p>
+								Téléchargement outil ligne de commande via npm.<br>
+								intialisation du projet, code ios / android app intégrant notre code js app (dans index.ios.js / index.android.js).<br>
+								Serveur local node pour dev<br>
+								Puis build appli iOS commande ou Android.<br>
+							</p>
+						</aside>
+					</section>
+					<section>
+
+						<p>
+							Composants React Native
+						</p>
+
+						<p>
+							<ul>
+								<li>View</li>
+								<li>Text</li>
+								<li>ListView</li>
+								<li>Image</li>
+								<li>TextInput</li>
+								<li>Modal</li>
+								<li>...</li>
+							</ul>
+						</p>
+
+						<aside class="notes">
+							<p>
+								Donc même principe que React : composants, render, props, state, methode...<br>
+								Mais pas de div ou span, composants propres à React Native View.<br>
+								On peut avoir des composants React propre à chaque platforme.
+							</p>
+						</aside>
+					</section>
+					<section>
+
+						<p>
+							Style & Image
+						</p>
+
+<pre><code data-trim data-noescape class="javascript">
+&lt;Image
+  style={styles.thumbnail}
+/&gt;
+[...]
+var styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+  thumbnail: {
+    width: 53,
+    height: 81,
+  },
+});
+</code></pre>
+
+						<aside class="notes">
+							<p>
+								Pour mise en page, utilisation de styling en js (plutot que fichier css, raison lien presentation - Namespace, dependance, isolation, ...)<br>
+								Implémentation modèle flex.<br>
+								Styles accessibles sur l'ensemble de l'app.<br>
+								<br>
+								Gestion des bonne simages automatique (taille et densité.
+							</p>
+						</aside>
+					</section>
+					<section>
+
+						<p>
+							Du Natif si besoin
+						</p>
+						<p>
+							<code>RCTBridgeModule</code>
+						</p>
+
+
+						<aside class="notes">
+							<p>
+
+							</p>
+						</aside>
+					</section>
+					<section>
+
+						<p>
+							APIs
+						</p>
+						<p>
+							<ul>
+								<li>Alerts</li>
+								<li>NetInfo</li>
+								<li>CameraRoll</li>
+								<li>AsyncStorage</li>
+								<li>TextInput</li>
+								<li>Modal</li>
+								<li>...</li>
+							</ul>
+						</p>
+
+						<aside class="notes">
+							<p>
+								Api pour interagir avec device.
+							</p>
+						</aside>
+					</section>
+					<section>
+
+						<p>
+							Un Workflow de dévelopement web
+						</p>
+
+						<aside class="notes">
+							<p>
+								Reload automatique sans build.<br>
+								serveur node qui sert index.(plateforme).js<br>
+							</p>
+						</aside>
+					</section>
+					<section>
+
+						<p>
+							Release your app!
+						</p>
+
+						<p>
+							AppDelegate.m<br>
+							jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];<br>
+							curl http://localhost:8081/index.ios.bundle\?dev\=0 -o main.jsbundle
+						</p>
+
+						<aside class="notes">
+							<p>
+								build appli iOS (en indiquant que l'on utilise plus le serveur Node de test / et Build Configuration : Release)<br>
+								Android (signer l'appli et utiliser gradle)
+							</p>
+						</aside>
+					</section>
+				</section>
+				<section>
+					<section>
+
+						<p>
+							Et Cordova dans tout ça ?
+						</p>
+
+						<aside class="notes">
+							<p>
+								React Native est <em>concurrent</em> de Cordova<br>
+								Cordova : intégration web app dans Webview, encapsuél.<br>
+								React native : interprétation code React dans appli préfabriquée.<br>
+								React dans Cordova : oui<br>
+								React native dans Cordova
+							</p>
+						</aside>
+					</section>
+					<section>
+
+						<p>
+							Angular derrière React Native ?
+						</p>
+
+						<aside class="notes">
+							<p>
+								Non car JavascriptCore ne gère pas le DOM (utilisé par le système de render Angular). Mais projets en cours et dev Angular cherchent à découpler core et render.
+							</p>
+						</aside>
+					</section>
+				</section>
+				<section>
+
+					<h2>
+						Demo Time!
+					</h2>
+
+					<aside class="notes">
+						<p>
+							Liste de films. <br>
+							Tuto officiel ensemble.
+						</p>
+					</aside>
+				</section>
+
+				<section>
+					<p>Références :</p>
+					<ul>
+						<li><a href="https://angular.io/">Angular 2</a></li>
+						<li><a href="https://facebook.github.io/react/">React</a></li>
+						<li><a href="http://ngreact.github.io/ngReact/">ngReact</a></li>
+						<li><a href="https://facebook.github.io/react-native/">React Native</a></li>
+						<li><a href="https://code.facebook.com/posts/1014532261909640/react-native-bringing-modern-web-techniques-to-mobile/">Why React Native</a></li>
+						<li><a href="https://facebook.github.io/react-native/docs/style.html">React Native Styling : rational behind it</a></li>
+						<li><a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/">Flexbox</a></li>
+						<li><a href="https://facebook.github.io/flux/">Flux</a></li>
+						<li><a href="https://facebook.github.io/react/blog/2015/02/20/introducing-relay-and-graphql.html">Introducing Relay and GraphQL</a></li>
+						<li><a href="https://scotch.io/tutorials/learning-react-getting-started-and-concepts">Learning React.js: Getting Started and Concepts</a></li>
+						<li><a href="https://github.com/angular/react-native-renderer">Angular2 remplacing React in React Native</a></li>
+						<li><a href="https://www.quora.com/Is-React-killing-Angular">Is React killing Angular?</a></li>
+					</ul>
+				</section>
 
 				<section>
 					<h2>That's all folks !</h2>
 					<br>
-					<p>Références :</p>
-					<ul>
-						<li><a href="" target="_blank">Lien</a></li>
-					</ul>
 					<br>
 					<br>
 					<p>
@@ -148,7 +638,7 @@
 					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
 					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
 					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { javascript.initHighlightingOnLoad(); } },
 					{ src: 'plugin/zoom-js/zoom.js', async: true },
 					{ src: 'plugin/notes/notes.js', async: true }
 				]
