@@ -20,6 +20,9 @@
 		<!-- Code syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
 
+		<!-- Custom CSS -->
+		<link rel="stylesheet" href="css/custom.css">
+
 		<!-- Printing and PDF exports -->
 		<script>
 			var link = document.createElement( 'link' );
@@ -49,7 +52,10 @@
 					</p>
 					<aside class="notes">
 						<p>
-
+							Rappel du contexte du dev frontend (SPA, MVC, React)<br>
+							Focus React<br>
+							React Native<br>
+							Contextualisation autres outils
 						</p>
 					</aside>
 				</section>
@@ -69,7 +75,9 @@
 
 						<aside class="notes">
 							<p>
-							Single Page Application : Application sur une seule page (mais plusieurs panneaux / panels), côté client. <br>
+							Single Page Application : Application sur une seule page côté client. <br>
+							Avant Formulaires et liesn, puis traitement serveur<br>
+							Améliorer XP utilisateur (ex. controle mot de passe) partie de l'application coté utilisateur.<br>
 							Echange avec sereur via API.
 							</p>
 						</aside>
@@ -125,8 +133,8 @@
 					</section>
 					<section>
 
-						<pre><code data-trim data-noescape class="javascript">
-var ComposantInter = React.createClass({
+						<pre><code  data-trim data-noescape class="javascript">
+var ComposantInterativ = React.createClass({
   render: function() {
     return (
       &lt;div className=&quot;composantInterativ&quot;&gt;
@@ -135,6 +143,11 @@ var ComposantInter = React.createClass({
     );
   }
 });
+
+ReactDOM.render(
+  &lt;ComposantInterativ /&gt;,
+  document.getElementById('content')
+);
 						</code></pre>
 
 						<aside class="notes">
@@ -182,7 +195,7 @@ var CommentList = React.createClass({
 					<section>
 
 						<p>
-							States
+							... et de States
 						</p>
 						<pre><code data-trim data-noescape class="javascript">
 var CommentForm = React.createClass({
@@ -219,7 +232,7 @@ var CommentForm = React.createClass({
 
 						<aside class="notes">
 							<p>
-								Données modifiable spar le composant - donc l'utilisateur). React maintient l'affichage à jour en cas de changement de state
+								Données modifiables par le composant - donc l'utilisateur). React maintient l'affichage à jour en cas de changement de state
 							</p>
 						</aside>
 					</section>
@@ -278,10 +291,15 @@ var CommentForm = React.createClass({
 						<p>
 							VirtualDOM et isomorphisme
 						</p>
+						<img src="img/react-virtualdom.png">
 
 						<aside class="notes">
 							<p>
-								render dans un contexte donné, cc React Native
+								render dans un contexte donné, cc React Native<br>
+								On manipule des composants, qui peuvent être modifié à postériori.<br>
+								En cas de modifs, React met à jour son VIrtualDOM, compare avec le DOM et fait le travail le plus otpmitisé<br>
+								De plus, dom capable d'être généré coté serveur si JS via node, puis être envoyé au navigateur déjà constitué (SEO friendly).
+
 							</p>
 						</aside>
 					</section>
@@ -322,21 +340,28 @@ var ComposantInter = React.createClass({displayName: 'ComposantInter',
 					</section>
 					<section>
 
+						<h3>
+							Data flow unidirectionnel<br>
+						</h3>
 						<p>
-							Data flow unidirectionnel
+							MVC Dependency Hell
 						</p>
+						<img src="img/mvc_dep_hell.png">
 
 						<aside class="notes">
 							<p>
-								Facebook choix données uni-directionnel (données reçues du parent, transmises aux enfant) pour facilité découpe en composant. <br>Même si on peut faire du bi-directionnel vers parents, grâce à des méthodes connues via des props, et donc peut être inclus dans une archi basée sur Angular
+								Facebook choix données uni-directionnel (données reçues du parent, transmises aux enfant) pour facilité découpe en composant. <br>Même si on peut faire du bi-directionnel vers parents, grâce à des méthodes connues via des props, et donc peut être inclus dans une archi basée sur Angular<br>
+								Mais trop de dépendaces rend imprévisible l'application
 							</p>
 						</aside>
 					</section>
 					<section>
 
 						<p>
-							Flux plutôt que MVC
+							Flux
 						</p>
+
+						<img src="img/flux-simple-diag.png">
 
 						<aside class="notes">
 							<p>
@@ -363,9 +388,19 @@ var ComposantInter = React.createClass({displayName: 'ComposantInter',
 					</section>
 					<section>
 
-						<p>
-							Problématiques
+						<h3>
+							Problématiques du dev mobile
+						</h3>
+						<p class="fragment fade-in">
+						 Workflow de développement trop lourd
 						</p>
+						<p class="fragment fade-in">
+						 Développement propre à chaque plateforme
+						</p>
+						<p class="fragment fade-in">
+						 Hybride via WebView non performant / UI non natif
+						</p>
+
 
 						<aside class="notes">
 							<p>
@@ -374,31 +409,49 @@ var ComposantInter = React.createClass({displayName: 'ComposantInter',
 								React utiliser massivement chez Facebook, mais pas que web.<br>
 								Facebook a choisi hybride puis natif (user XP).<br>
 								Mais workflow dev mobile lourd a ralenti leurs équipes.<br>
-								Réact créant une abstraction du DOM, via son code déclaratif (juste des descriptions de composant à un état donné) et son DOM virtuel, au lieux de générer des div et span, pourrait générer des composants natifs, ios ou android.<br>
-								Conserve un seul code js React.<br>
-								Dans appli, moteur JavaScriptCore (=/= webview) générant les composants natifs. Bénéfice du multi thread (car non bloquant) + éléments natifs.
-
+								Perormance mono thread de la webview, et san éléments natifs.
 							</p>
 						</aside>
 					</section>
 					<section>
 
-						<p>
-							Concrètement
+						<h3>
+							React Native FTW!!!
+						</h3>
+						<p class="fragment fade-in">
+						 VirtualDOM
 						</p>
+						<p class="fragment fade-in">
+						 Développement en JS(X)
+						</p>
+						<p class="fragment fade-in">
+						 Génération d'éléments natifs performants.
+						</p>
+						<aside class="notes">
+							<p>
+								Réact créant une abstraction du DOM, via son code déclaratif (juste des descriptions de composant à un état donné) et son DOM virtuel, au lieux de générer des div et span, pourrait générer des composants natifs, ios ou android.<br>
+								Conserve un seul code js React.<br>
+								Dans appli, moteur JavaScriptCore (=/= webview) générant les composants natifs. Bénéfice du multi thread (car non bloquant) + éléments natifs.
+							</p>
+						</aside>
+					</section>
+					<section>
 
-						<p class="fragment fade-in">
-						 <code>npm install -g react-native-cli</code>
-						</p>
-						<p class="fragment fade-in">
-						 <code>react-native init AwesomeProject</code>
-						</p>
+						<h3>
+							Concrètement
+						</h3>
+
+						 <pre class="fragment fade-in"><code>$ npm install -g react-native-cli</code></pre>
+
+
+						 <pre class="fragment fade-in"><code>$ react-native init AwesomeProject</code></pre>
+						<br>
 						<p class="fragment fade-in">
 						 Build dans Xcode
 						</p>
-						<p class="fragment fade-in">
-						 <code>react-native run-android</code>
-						</p>
+						<br>
+						 <pre class="fragment fade-in"><code>$ react-native run-android</code></pre>
+
 						<aside class="notes">
 							<p>
 								Téléchargement outil ligne de commande via npm.<br>
@@ -441,9 +494,7 @@ var ComposantInter = React.createClass({displayName: 'ComposantInter',
 						</p>
 
 <pre><code data-trim data-noescape class="javascript">
-&lt;Image
-  style={styles.thumbnail}
-/&gt;
+&lt;Image style={styles.thumbnail} /&gt;
 [...]
 var styles = StyleSheet.create({
   container: {
@@ -474,9 +525,9 @@ var styles = StyleSheet.create({
 						<p>
 							Du Natif si besoin
 						</p>
-						<p>
-							<code>RCTBridgeModule</code>
-						</p>
+
+						<pre><code>RCTBridgeModule</code></pre>
+
 
 
 						<aside class="notes">
@@ -523,20 +574,24 @@ var styles = StyleSheet.create({
 					</section>
 					<section>
 
-						<p>
+						<h3>
 							Release your app!
-						</p>
+						</h3>
 
-						<p>
-							AppDelegate.m<br>
-							jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];<br>
-							curl http://localhost:8081/index.ios.bundle\?dev\=0 -o main.jsbundle
+						<p class="fragment fade-in">
+							<pre><code>AwesomeApp/ios/AwesomeApp/AppDelegate.m</code></pre>
+							<pre><code>jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];</code></pre>
+							<pre><code>$ curl http://localhost:8081/index.ios.bundle\?dev\=0 -o main.jsbundle</code></pre>
+						</p>
+						<br>
+						<p class="fragment fade-in">
+							<pre><code>$ cd android && ./gradlew assembleRelease</code></pre>
 						</p>
 
 						<aside class="notes">
 							<p>
 								build appli iOS (en indiquant que l'on utilise plus le serveur Node de test / et Build Configuration : Release)<br>
-								Android (signer l'appli et utiliser gradle)
+								Android (signer l'appli et utiliser gradle - outil de build)
 							</p>
 						</aside>
 					</section>
@@ -554,7 +609,7 @@ var styles = StyleSheet.create({
 								Cordova : intégration web app dans Webview, encapsuél.<br>
 								React native : interprétation code React dans appli préfabriquée.<br>
 								React dans Cordova : oui<br>
-								React native dans Cordova
+								React native dans Cordova : non
 							</p>
 						</aside>
 					</section>
@@ -588,18 +643,25 @@ var styles = StyleSheet.create({
 				<section>
 					<p>Références :</p>
 					<ul>
-						<li><a href="https://angular.io/">Angular 2</a></li>
 						<li><a href="https://facebook.github.io/react/">React</a></li>
-						<li><a href="http://ngreact.github.io/ngReact/">ngReact</a></li>
 						<li><a href="https://facebook.github.io/react-native/">React Native</a></li>
 						<li><a href="https://code.facebook.com/posts/1014532261909640/react-native-bringing-modern-web-techniques-to-mobile/">Why React Native</a></li>
 						<li><a href="https://facebook.github.io/react-native/docs/style.html">React Native Styling : rational behind it</a></li>
 						<li><a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/">Flexbox</a></li>
 						<li><a href="https://facebook.github.io/flux/">Flux</a></li>
 						<li><a href="https://facebook.github.io/react/blog/2015/02/20/introducing-relay-and-graphql.html">Introducing Relay and GraphQL</a></li>
+					</ul>
+				</section>
+				<section>
+					<p>Références (part 2) :</p>
+					<ul>
 						<li><a href="https://scotch.io/tutorials/learning-react-getting-started-and-concepts">Learning React.js: Getting Started and Concepts</a></li>
 						<li><a href="https://github.com/angular/react-native-renderer">Angular2 remplacing React in React Native</a></li>
+						<li><a href="https://angular.io/">Angular 2</a></li>
+						<li><a href="http://ngreact.github.io/ngReact/">ngReact</a></li>
 						<li><a href="https://www.quora.com/Is-React-killing-Angular">Is React killing Angular?</a></li>
+						<li><a href="http://firstdoit.com/react-1/">How I learned to stop worrying and love React</a></li>
+						<li><a href="http://fr.slideshare.net/hszcg1/react-tech-salon">Slideshare React Tech Salon</a></li>
 					</ul>
 				</section>
 
@@ -635,12 +697,24 @@ var styles = StyleSheet.create({
 
 				// Optional reveal.js plugins
 				dependencies: [
-					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { javascript.initHighlightingOnLoad(); } },
-					{ src: 'plugin/zoom-js/zoom.js', async: true },
-					{ src: 'plugin/notes/notes.js', async: true }
+					// Cross-browser shim that fully implements classList - https://github.com/eligrey/classList.js/
+			        { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+
+			        // Interpret Markdown in <section> elements
+			        { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+			        { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+
+			        // Syntax highlight for <code> elements
+			        { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+
+			        // Zoom in and out with Alt+click
+			        { src: 'plugin/zoom-js/zoom.js', async: true },
+
+			        // Speaker notes
+			        { src: 'plugin/notes/notes.js', async: true },
+
+			        // MathJax
+			        { src: 'plugin/math/math.js', async: true }
 				]
 			});
 
