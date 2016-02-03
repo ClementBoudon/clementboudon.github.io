@@ -3,7 +3,13 @@
     line-height: normal;
 }
 
-
+img.flux-logo{
+    border: none !important;
+    background: none !important;
+    box-shadow: none !important;
+    max-width: 7% !important;
+    margin: 0 !important;
+}
 img.plateforme{
     border: none !important;
     background: none !important;

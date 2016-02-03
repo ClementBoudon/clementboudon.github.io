@@ -76,9 +76,9 @@
 						<aside class="notes">
 							<p>
 							Single Page Application : Application sur une seule page côté client. <br>
-							Avant Formulaires et liesn, puis traitement serveur<br>
-							Améliorer XP utilisateur (ex. controle mot de passe) partie de l'application coté utilisateur.<br>
-							Echange avec sereur via API.
+							Avant Formulaires et liens, puis traitement serveur<br>
+							Améliorer XP utilisateur (ex. controle mot de passe) => partie de l'application coté utilisateur.<br>
+							Echange avec serveur via API.
 							</p>
 						</aside>
 					</section>
@@ -102,7 +102,7 @@
 
 						<aside class="notes">
 							<p>
-
+								Gérer la vue plus simplement et de manière plus performante que les directives Angular : React
 							</p>
 						</aside>
 					</section>
@@ -115,7 +115,10 @@
 						<aside class="notes">
 							<p>
 								Rappel plus précis sur React. Pas React Native encore. <br>
-								But : gérer la vue, les éléments graphiques présentés à l'utilisateur et enregistrant ses retours.<br>
+								Release en juin 2013<br>
+								Release v0.14.7 le 28 janvier 2016
+								Ex. Instagram tout React<br>
+								But : gérer la vue, les éléments graphiques présentés à l'utilisateur et enregistrer ses retours.<br>
 								Intégration code js react.js et react-dom.js
 
 							</p>
@@ -174,7 +177,6 @@ var Comment = React.createClass({
     );
   }
 });
-
 var CommentList = React.createClass({
   render: function() {
     return (
@@ -200,13 +202,10 @@ var CommentList = React.createClass({
 						<pre><code data-trim data-noescape class="javascript">
 var CommentForm = React.createClass({
   getInitialState: function() {
-    return {author: '', text: ''};
+    return {author: ''};
   },
   handleAuthorChange: function(e) {
     this.setState({author: e.target.value});
-  },
-  handleTextChange: function(e) {
-    this.setState({text: e.target.value});
   },
   render: function() {
     return (
@@ -217,12 +216,6 @@ var CommentForm = React.createClass({
           value={this.state.author}
           onChange={this.handleAuthorChange}
         /&gt;
-        &lt;input
-          type=&quot;text&quot;
-          placeholder=&quot;Say something...&quot;
-          value={this.state.text}
-          onChange={this.handleTextChange}
-        /&gt;
         &lt;input type=&quot;submit&quot; value=&quot;Post&quot; /&gt;
       &lt;/form&gt;
     );
@@ -232,7 +225,7 @@ var CommentForm = React.createClass({
 
 						<aside class="notes">
 							<p>
-								Données modifiables par le composant - donc l'utilisateur). React maintient l'affichage à jour en cas de changement de state
+								Données modifiables par le composant - donc l'utilisateur. React maintient l'affichage à jour en cas de changement de state
 							</p>
 						</aside>
 					</section>
@@ -246,12 +239,7 @@ var CommentForm = React.createClass({
   getInitialState: function() {
     return {author: '', text: ''};
   },
-  handleAuthorChange: function(e) {
-    this.setState({author: e.target.value});
-  },
-  handleTextChange: function(e) {
-    this.setState({text: e.target.value});
-  },
+  //[...]
   componentDidMount: function(e) {
     // Your code here
   },
@@ -263,12 +251,6 @@ var CommentForm = React.createClass({
           placeholder=&quot;Your name&quot;
           value={this.state.author}
           onChange={this.handleAuthorChange}
-        /&gt;
-        &lt;input
-          type=&quot;text&quot;
-          placeholder=&quot;Say something...&quot;
-          value={this.state.text}
-          onChange={this.handleTextChange}
         /&gt;
         &lt;input type=&quot;submit&quot; value=&quot;Post&quot; /&gt;
       &lt;/form&gt;
@@ -295,10 +277,10 @@ var CommentForm = React.createClass({
 
 						<aside class="notes">
 							<p>
-								render dans un contexte donné, cc React Native<br>
-								On manipule des composants, qui peuvent être modifié à postériori.<br>
+								render() effectué dans un contexte donné, cc React Native<br>
+								On manipule des composants, qui peuvent être modifiés à postériori.<br>
 								En cas de modifs, React met à jour son VIrtualDOM, compare avec le DOM et fait le travail le plus otpmitisé<br>
-								De plus, dom capable d'être généré coté serveur si JS via node, puis être envoyé au navigateur déjà constitué (SEO friendly).
+								De plus, DOM initial capable d'être généré coté serveur si JS via node, puis être envoyé au navigateur déjà constitué (SEO friendly).
 
 							</p>
 						</aside>
@@ -309,7 +291,7 @@ var CommentForm = React.createClass({
 							JSX
 						</p>
 						<pre><code data-trim data-noescape class="javascript">
-var ComposantInter = React.createClass({
+var ComposantInterativ = React.createClass({
   render: function() {
     return (
       &lt;div className=&quot;composantInterativ&quot;&gt;
@@ -320,10 +302,10 @@ var ComposantInter = React.createClass({
 });
 						</code></pre>
 						<pre><code data-trim data-noescape class="javascript">
-var ComposantInter = React.createClass({displayName: 'ComposantInter',
+var ComposantInterativ = React.createClass({displayName: 'ComposantInterativ',
   render: function() {
     return (
-      React.createElement('div', {className: "ComposantInter"},
+      React.createElement('div', {className: "composantInterativ"},
         "Hello, world! I am an Interactiv component."
       )
     );
@@ -334,7 +316,8 @@ var ComposantInter = React.createClass({displayName: 'ComposantInter',
 
 						<aside class="notes">
 							<p>
-								XML lique pour lisibilité, pas obligatoire, vanilla JS possible, ou utilisation babel js pour interprétation live ou  compiler build js (grunt, gulp...)
+								XML like pour lisibilité, mais vanilla JS possible. <br>
+								Sinon utilisation babel.js pour interprétation live ou  compiler build js (grunt, gulp...)
 							</p>
 						</aside>
 					</section>
@@ -350,15 +333,16 @@ var ComposantInter = React.createClass({displayName: 'ComposantInter',
 
 						<aside class="notes">
 							<p>
-								Facebook choix données uni-directionnel (données reçues du parent, transmises aux enfant) pour facilité découpe en composant. <br>Même si on peut faire du bi-directionnel vers parents, grâce à des méthodes connues via des props, et donc peut être inclus dans une archi basée sur Angular<br>
-								Mais trop de dépendaces rend imprévisible l'application
+								Facebook a fait le choix d'un flux de données uni-directionnel (données reçues du parent, transmises aux enfants) pour facilité découpe en composant. <br>
+								Même si on peut faire du bi-directionnel vers parents, grâce à des méthodes connues via des props, et donc peut être inclus dans une archi basée sur Angular<br>
+								Mais trop de dépendances rend imprévisible l'application.
 							</p>
 						</aside>
 					</section>
 					<section>
 
 						<p>
-							Flux
+							<img src="img/flux.png" class="flux-logo">&nbsp;Flux
 						</p>
 
 						<img src="img/flux-simple-diag.png">
@@ -366,7 +350,7 @@ var ComposantInter = React.createClass({displayName: 'ComposantInter',
 						<aside class="notes">
 							<p>
 								Mais comment gérer la remontée de données ? Flow Flux : View -> Action -> Dispatcher -> Store -> View.<br>
-								Gestion des donnéeses globales via Relay et GraphQL.<br>
+								Gestion des données globales via Relay et GraphQL.<br>
 								S'éloigne de MVC mais possible intégration dans Angular (ngReact) pour remplacer les directives Angular.<br>
 							</p>
 						</aside>
@@ -382,7 +366,10 @@ var ComposantInter = React.createClass({displayName: 'ComposantInter',
 
 						<aside class="notes">
 							<p>
-
+								Release Mars 2015.<br>
+								D'abord iOS only, puis Android.<br>
+								Release 0.18 le 18 janvier 2016.<br>
+								Utilisé par : Appli iOS et Android de gestion des campagnes pub Facebook et Facebook groups.<br>
 							</p>
 						</aside>
 					</section>
@@ -404,12 +391,10 @@ var ComposantInter = React.createClass({displayName: 'ComposantInter',
 
 						<aside class="notes">
 							<p>
-								React présenté en 2013.<br>
-								React native 2015, d'abord iOS puis Android.<br>
 								React utiliser massivement chez Facebook, mais pas que web.<br>
 								Facebook a choisi hybride puis natif (user XP).<br>
 								Mais workflow dev mobile lourd a ralenti leurs équipes.<br>
-								Perormance mono thread de la webview, et san éléments natifs.
+								Performance mono thread de la webview, et sans éléments natifs.
 							</p>
 						</aside>
 					</section>
@@ -429,7 +414,7 @@ var ComposantInter = React.createClass({displayName: 'ComposantInter',
 						</p>
 						<aside class="notes">
 							<p>
-								Réact créant une abstraction du DOM, via son code déclaratif (juste des descriptions de composant à un état donné) et son DOM virtuel, au lieux de générer des div et span, pourrait générer des composants natifs, ios ou android.<br>
+								Réact créant une abstraction du DOM, via son code déclaratif (juste des descriptions de composant à un état donné) et son DOM virtuel, au lieu de générer des div et span, pourrait générer des composants natifs, ios ou android.<br>
 								Conserve un seul code js React.<br>
 								Dans appli, moteur JavaScriptCore (=/= webview) générant les composants natifs. Bénéfice du multi thread (car non bloquant) + éléments natifs.
 							</p>
@@ -460,7 +445,8 @@ var ComposantInter = React.createClass({displayName: 'ComposantInter',
 								Téléchargement outil ligne de commande via npm.<br>
 								intialisation du projet, code ios / android app intégrant notre code js app (dans index.ios.js / index.android.js).<br>
 								Serveur local node pour dev<br>
-								Puis build appli iOS commande ou Android.<br>
+								Puis build appli iOS commande ou Android pour lancer les simulateurs.<br>
+								Enfin on peut dev en live.
 							</p>
 						</aside>
 					</section>
@@ -519,7 +505,7 @@ var styles = StyleSheet.create({
 								Implémentation modèle flex.<br>
 								Styles accessibles sur l'ensemble de l'app.<br>
 								<br>
-								Gestion des bonne simages automatique (taille et densité.
+								Gestion des images optimales automatique (taille et densité).
 							</p>
 						</aside>
 					</section>
@@ -535,7 +521,7 @@ var styles = StyleSheet.create({
 
 						<aside class="notes">
 							<p>
-
+								Native module is just an Objective-C class that implements the RCTBridgeModule protocol
 							</p>
 						</aside>
 					</section>
@@ -613,7 +599,7 @@ var styles = StyleSheet.create({
 						<aside class="notes">
 							<p>
 								React Native est <em>concurrent</em> de Cordova<br>
-								Cordova : intégration web app dans Webview, encapsuél.<br>
+								Cordova : intégration web app dans Webview, encapsulé.<br>
 								React native : interprétation code React dans appli préfabriquée.<br>
 								React dans Cordova : oui<br>
 								React native dans Cordova : non
@@ -628,7 +614,7 @@ var styles = StyleSheet.create({
 
 						<aside class="notes">
 							<p>
-								Non car JavascriptCore ne gère pas le DOM (utilisé par le système de render Angular). Mais projets en cours et dev Angular cherchent à découpler core et render.
+								Non car JavascriptCore ne gère pas le DOM (utilisé par le système de render Angular). Mais projets en cours et dev Angular cherchent à découpler core et render dans Angular.
 							</p>
 						</aside>
 					</section>
@@ -697,6 +683,7 @@ var styles = StyleSheet.create({
 				progress: true,
 				history: true,
 				center: true,
+				showNotes: false,
 
 				// height: 90%,
 
