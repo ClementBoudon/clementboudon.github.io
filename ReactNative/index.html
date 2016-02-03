@@ -447,11 +447,14 @@ var ComposantInter = React.createClass({displayName: 'ComposantInter',
 						 <pre class="fragment fade-in"><code>$ react-native init AwesomeProject</code></pre>
 						<br>
 						<p class="fragment fade-in">
-						 Build dans Xcode
+							<img src="img/apple.png" class="plateforme"><br>
+						 	Build dans Xcode
 						</p>
 						<br>
-						 <pre class="fragment fade-in"><code>$ react-native run-android</code></pre>
-
+						<p class="fragment fade-in">
+							<img src="img/android.png" class="plateforme"><br>
+						 	<code>$ react-native run-android</code>
+						</p>
 						<aside class="notes">
 							<p>
 								Téléchargement outil ligne de commande via npm.<br>
@@ -578,15 +581,19 @@ var styles = StyleSheet.create({
 							Release your app!
 						</h3>
 
-						<p class="fragment fade-in">
-							<pre><code>AwesomeApp/ios/AwesomeApp/AppDelegate.m</code></pre>
-							<pre><code>jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];</code></pre>
-							<pre><code>$ curl http://localhost:8081/index.ios.bundle\?dev\=0 -o main.jsbundle</code></pre>
-						</p>
+
+							<div class="fragment fade-in bg-plateforme bg-plateforme-ios">
+								<pre><code>AwesomeApp/ios/AwesomeApp/AppDelegate.m</code></pre>
+								<pre><code>jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];</code></pre>
+								<pre><code>$ curl http://localhost:8081/index.ios.bundle\?dev\=0 -o main.jsbundle</code></pre>
+							</div>
+
 						<br>
-						<p class="fragment fade-in">
-							<pre><code>$ cd android && ./gradlew assembleRelease</code></pre>
-						</p>
+
+							<div class="fragment fade-in bg-plateforme bg-plateforme-android">
+								<pre><code>$ cd android && ./gradlew assembleRelease</code></pre>
+							</div>
+
 
 						<aside class="notes">
 							<p>

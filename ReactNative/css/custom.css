@@ -2,3 +2,26 @@
     font-size: 0.75em;
     line-height: normal;
 }
+
+
+img.plateforme{
+    border: none !important;
+    background: none !important;
+    box-shadow: none !important;
+    max-width: 9% !important;
+}
+
+.bg-plateforme{
+    background-repeat: no-repeat !important;
+    background-position: 0 0 !important;
+    background-size: 30px !important;
+    height: 40%;
+}
+
+.bg-plateforme-ios{
+    background-image: url('../img/apple.png') !important;
+}
+
+.bg-plateforme-android{
+    background-image: url('../img/android.png') !important;
+}
